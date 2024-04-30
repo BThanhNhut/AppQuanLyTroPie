@@ -49,32 +49,46 @@ export type District = {
 };
 
 //Home
+type Types = {
+  type_name: string;
+  status: boolean;
+};
 
-interface Room {
-  address: string;
-  area_height: number;
-  area_width: number;
+type Room = {
   name_room: string;
-  note: string;
+  address: string;
+  room_price: number;
+  deposit_price: number;
+  image: string;
+  area_width: number;
+  area_height: number;
+  phone_number: string;
+  floor: number;
   number_of_people: number;
+  note: string;
   note_gender: string;
   province: string;
-  room_price: number;
-}
+  district: string;
+  ward: string;
+  types: Types;
+};
 
-interface Account {
+type Account = {
+  id: number;
   customer_name: string;
-}
+  avatar: string;
+};
 
-export interface DataItem1 {
+export type Posts = {
   id: number;
   accounts: Account;
   rooms: Room;
   title: string;
   create_at: Date;
-}
+};
 
 export type cardPostProps = {
-  item: DataItem1;
-  onPress: (event: GestureResponderEvent) => void;
+  item: Posts;
+  onPress: (id: number) => void;
 };
+//  onPress: (event: GestureResponderEvent) => void;

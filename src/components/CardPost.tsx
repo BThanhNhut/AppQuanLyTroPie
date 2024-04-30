@@ -13,25 +13,32 @@ import {Colors} from '../assets/Colors';
 import {cardPostProps} from '../assets/types/PropTypes';
 const {width, height} = Dimensions.get('window');
 
-function formatCurrency(amount: any) {
+export function formatCurrency(amount: any) {
   return amount.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'});
 }
 
 function CardPost({item, onPress}: cardPostProps) {
+  const currentDate = new Date().getTime() as number; // Lấy thời gian hiện tại tính bằng mili giây
+  const postDate = new Date(item.create_at).getTime() as number; // Lấy thời gian tạo bài viết tính bằng mili giây
+  const timeDifference = currentDate - postDate; // Khoảng thời gian tính bằng mili giây
+
+  const millisecondsInADay = 1000 * 60 * 60 * 24;
+  const daysDifference = Math.floor(timeDifference / millisecondsInADay);
+
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={onPress}
+      onPress={() => onPress(item.id)}
       activeOpacity={7.0}>
       <View style={styles.borderimage}>
         <Image
           style={styles.image}
-          source={require('../assets/images/hinhtro.jpg')}
+          source={{uri: item.rooms.image}}
           resizeMode="cover"></Image>
       </View>
       <View style={styles.information}>
         <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.time}>{' * ' + item.create_at}1d</Text>
+        <Text style={styles.time}>{daysDifference}d</Text>
         <View style={styles.row}>
           <Icon
             name="transgender"

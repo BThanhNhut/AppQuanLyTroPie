@@ -1,6 +1,6 @@
 import {View} from 'react-native';
 import CardPost2 from '../../components/CardPost2';
-import {District} from '../types/PropTypes';
+import {District, Posts} from '../types/PropTypes';
 
 const data = [
   {id: '1', content: 'Item 1'},
@@ -18,13 +18,13 @@ type props = {
   districtHN: District[];
 };
 
-export const renderCards = () => {
+export const renderCards = (posts: Posts[]) => {
   const cardRows = [];
-  for (let i = 0; i < data.length; i += 2) {
+  for (let i = 0; i < posts.length; i += 2) {
     const row = (
       <View key={i} style={{flexDirection: 'row'}}>
-        {data.slice(i, i + 2).map(item => (
-          <CardPost2 key={item.id} />
+        {posts.slice(i, i + 2).map(item => (
+          <CardPost2 key={item.id} item={item} />
         ))}
       </View>
     );

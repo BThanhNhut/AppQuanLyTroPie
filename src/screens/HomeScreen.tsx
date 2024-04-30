@@ -5,8 +5,6 @@ import {
   Text,
   View,
   ScrollView,
-  TouchableOpacity,
-  Image,
   SafeAreaView,
 } from 'react-native';
 import {styles} from './styles/HomeStyle';
@@ -16,26 +14,31 @@ import Icon3 from 'react-native-vector-icons/FontAwesome5';
 import CardSearch from '../components/CardSearch';
 import Slider from '../components/Slider';
 import {SearchContext} from '../contexts/SearchContext';
-import {District, DataItem1} from '../assets/types/PropTypes';
-import CustomModalProvine from '../components/CustomModalProvine';
+import {District, Posts} from '../assets/types/PropTypes';
 import {
   districtsOfHCMC,
   districtsOfDaNang,
   districtsOfHaNoi,
-  scrollData,
 } from '../assets/Datas/HomeData';
 import {checkProvince, renderCards} from '../assets/Services/HomeService';
 import CardAddress from '../components/CardAddress';
 import CardPost from '../components/CardPost';
+import CardSearchMenu from '../components/CardSeachMenu';
 
 const {width, height} = Dimensions.get('window');
 export default function HomeScreen({navigation}: any): React.JSX.Element {
-  const [modalVisible, setModalVisible] = useState(false);
   const [showHeader, setShowHeader] = useState(false);
   const animatedValue = useRef(new Animated.Value(0)).current;
   const searchContext = useContext(SearchContext);
+  const [data, setData] = useState<Posts[]>([]);
 
-  const [data, setData] = useState<DataItem1[]>([]);
+  const latestPosts = data
+    .sort((a, b) => {
+      const dateA = new Date(a.create_at).getTime();
+      const dateB = new Date(b.create_at).getTime();
+      return dateB - dateA;
+    })
+    .slice(0, 3);
 
   const fetchData = async () => {
     try {
@@ -53,8 +56,12 @@ export default function HomeScreen({navigation}: any): React.JSX.Element {
     console.log('xin chao');
     console.log(data);
   };
-  const onpressDetail = () => {
-    navigation.navigate('Detail');
+  const onpressDetail = (id: number) => {
+    console.log('vào detail');
+    navigation.navigate('DetailScreen', {
+      itemId: 86,
+      otherParam: id,
+    });
   };
 
   const districtsToShow: District[] = checkProvince({
@@ -111,70 +118,7 @@ export default function HomeScreen({navigation}: any): React.JSX.Element {
           <Slider></Slider>
         </View>
         {/* Card search */}
-        <View style={styles.cardsearch}>
-          <View style={[styles.row, {height: '25%'}]}>
-            <TouchableOpacity
-              style={styles.layout1}
-              activeOpacity={0.8}
-              onPress={() => {
-                setModalVisible(true);
-              }}>
-              <Icon2 name="place" size={25} color="#ff7911"></Icon2>
-              <Text style={{color: '#ff7911'}}>{searchContext?.Province}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.txtplace} activeOpacity={0.9}>
-              <Text onPress={onPressSearch}>Tìm kiếm tin đăng </Text>
-            </TouchableOpacity>
-          </View>
-
-          <CustomModalProvine
-            visible={modalVisible}
-            onClose={() => {
-              setModalVisible(false);
-              console.log('xin chao');
-            }}
-          />
-
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            <View
-              style={[
-                styles.row,
-                {
-                  height: height * 0.1,
-                  width: width,
-                  marginTop: 10,
-                },
-              ]}>
-              {scrollData.map((item, index) => (
-                <View
-                  key={index}
-                  style={{
-                    height: '100%',
-                    width: '20%',
-                    marginLeft: 10,
-                  }}>
-                  <Image
-                    source={item.nameIcon}
-                    resizeMode="contain"
-                    style={{
-                      height: '60%',
-                      width: '100%',
-                    }}></Image>
-                  <Text
-                    style={{
-                      textAlign: 'center',
-                      height: '40%',
-                      fontSize: 11,
-                      marginTop: 5,
-                    }}>
-                    {item.text}
-                  </Text>
-                </View>
-              ))}
-            </View>
-          </ScrollView>
-        </View>
-
+        <CardSearchMenu />
         {/*  */}
         <View style={styles.layout2}>
           <View style={styles.row}>
@@ -202,13 +146,17 @@ export default function HomeScreen({navigation}: any): React.JSX.Element {
               size={20}
               color="#ff7911"
               style={styles.icon}></Icon>
-            <Text style={styles.txticon}>Bài viết nổi bật</Text>
+            <Text style={styles.txticon}>Bài viết gần đây</Text>
           </View>
         </View>
         <View style={{marginBottom: height * 0.02}}>
           {/* <CardPost onPress={onpressDetail}  /> */}
-          {data.map(item => (
-            <CardPost key={item.id} item={item} onPress={onpressDetail} />
+          {latestPosts.map(item => (
+            <CardPost
+              key={item.id}
+              item={item}
+              onPress={(id: number) => onpressDetail(id)}
+            />
           ))}
         </View>
 
@@ -226,7 +174,7 @@ export default function HomeScreen({navigation}: any): React.JSX.Element {
           style={{
             width: width,
           }}>
-          {renderCards()}
+          {renderCards(data)}
         </View>
       </ScrollView>
     </SafeAreaView>

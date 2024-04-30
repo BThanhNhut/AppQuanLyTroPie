@@ -30,6 +30,7 @@ import HomeScreen from './src/screens/HomeScreen';
 import TabsNavigator from './src/navigations/TabsNavigator';
 import {NavigationContainer} from '@react-navigation/native';
 import {SearchProvider} from './src/contexts/SearchContext';
+import DetailScreen from './src/screens/DetailScreen';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -64,9 +65,7 @@ function Section({children, title}: SectionProps): React.JSX.Element {
 function App(): React.JSX.Element {
   return (
     <SearchProvider>
-      <NavigationContainer>
-        <TabsNavigator />
-      </NavigationContainer>
+      <MainNavigation />
     </SearchProvider>
   );
 }
