@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   ScrollView,
   View,
@@ -7,18 +7,31 @@ import {
   Dimensions,
   Image,
   ColorValue,
+  TouchableOpacity,
+  Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
-import Icon3 from 'react-native-vector-icons/FontAwesome5';
 import Icon4 from 'react-native-vector-icons/Ionicons';
 import Icon5 from 'react-native-vector-icons/AntDesign';
 // Component
 import Cardaccount from '../components/CardAccount';
 import BottomDetail from '../components/BottomDetail';
-import {Posts} from '../assets/types/PropTypes';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-
+import {
+  AmenitiesItem,
+  CardServiceItemProps,
+  FurnitureItem,
+  Posts,
+} from '../assets/types/PropTypes';
+import CardServiceItem from '../components/CardServiceItem';
+import axios from 'axios';
+import {
+  addFavorite,
+  removeFavorite,
+  showToastaddfavorites,
+  showToastremovefavorites,
+} from './Services/DetailService';
+import {AlertNotificationRoot} from 'react-native-alert-notification';
 const {width, height} = Dimensions.get('window');
 
 let orange = '#FF7613';
@@ -41,35 +54,152 @@ function DetailScreen({
 }: DetailsScreenProps): React.JSX.Element {
   const [iconColor, setIconColor] = useState<ColorValue>('#888888');
   const [dataRoom, setdataRoom] = useState<Posts>();
-  const {itemId, otherParam} = route.params;
+  const [mainImage, setmainImage] = useState<string>();
+  const [serviceItem, setserviceItem] = useState<CardServiceItemProps[]>([]);
+  const [amenitiesItem, setamenitiesItem] = useState<AmenitiesItem[]>([]);
+  const [furnituresItem, setfurnituresItem] = useState<FurnitureItem[]>([]);
+  const [listImage, setlistImage] = useState<string[]>([]);
 
-  const [service, setservice] = useState<any>();
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
+
+  const {id_post} = route.params;
+  let id_account = 1;
 
   const handleIconPress = () => {
     const newColor = iconColor === '#888888' ? '#FF0000' : '#888888';
-    setIconColor(newColor);
+    if (iconColor === '#888888') {
+      addFavorite(1, id_post);
+      showToastaddfavorites();
+      setIconColor(newColor);
+    } else {
+      showToastremovefavorites();
+      removeFavorite(1, id_post);
+      setIconColor(newColor);
+    }
   };
 
   useEffect(() => {
-    const num: number = parseInt(otherParam, 10);
-    fetchData(num);
+    const fetchData = async () => {
+      try {
+        // Gọi tất cả các API
+        const responses = await Promise.all([
+          axios.get(
+            `https://qlphong-tro-production.up.railway.app/posts/${id_post}`,
+          ),
+          axios.get(
+            `https://qlphong-tro-production.up.railway.app/rooms/${id_post}/images`,
+          ),
+          axios.get(
+            `https://qlphong-tro-production.up.railway.app/rooms/${id_post}/services`,
+          ),
+          axios.get(
+            `https://qlphong-tro-production.up.railway.app/rooms/${id_post}/amenities`,
+          ),
+          axios.get(
+            `https://qlphong-tro-production.up.railway.app/rooms/${id_post}/furniture`,
+          ),
+          axios.get(
+            `https://qlphong-tro-production.up.railway.app/rooms/${id_account}/${id_post}/favorites`,
+          ),
+        ]);
+        // Lưu trữ dữ liệu từ các API vào state
+        setdataRoom(responses[0].data);
+        setlistImage(responses[1].data);
+        setserviceItem(responses[2].data);
+        setamenitiesItem(responses[3].data);
+        setfurnituresItem(responses[4].data);
+        const apiResponse = responses[5].data;
+        const newIconColor = apiResponse ? '#FF0000' : '#888888';
+        setIconColor(newIconColor);
+        // Đánh dấu đã kết thúc load dữ liệu
+        setmainImage(dataRoom?.rooms.image);
+        setIsDataLoaded(true);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
   }, []);
 
-  const fetchData = async (parameter: number) => {
-    // setLoading(true);
-    try {
-      const response = await fetch(
-        `https://qlphong-tro-production.up.railway.app/posts/${parameter}`,
-      ); // Sử dụng tham số trong URL
-      if (!response.ok) {
-        throw new Error('Failed to fetch data');
-      }
-      const result = await response.json();
-      setdataRoom(result);
-      console.log(result);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
+  // const fetchData = async (parameter: number) => {
+  //   // setLoading(true);
+  //   try {
+  //     const response = await fetch(
+  //       `https://qlphong-tro-production.up.railway.app/posts/${parameter}`,
+  //     );
+  //     if (!response.ok) {
+  //       throw new Error('Failed to fetch data');
+  //     }
+  //     const result = await response.json();
+  //     setdataRoom(result);
+  //     setmainImage(result?.rooms.image);
+  //     setIsDataLoaded(true);
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
+  //   }
+  // };
+
+  // const fetchImage = async (id: number) => {
+  //   try {
+  //     const response = await fetch(
+  //       `https://qlphong-tro-production.up.railway.app/rooms/${id}/images`,
+  //     );
+  //     const result = await response.json();
+  //     setlistImage(result);
+  //   } catch (error) {
+  //     console.error('error fetching data:', error);
+  //   }
+  // };
+
+  // const fetchServiceItem = async (id: number) => {
+  //   try {
+  //     const response = await fetch(
+  //       `https://qlphong-tro-production.up.railway.app/rooms/${id}/services`,
+  //     );
+  //     if (!response.ok) {
+  //       throw new Error('Failed to fetch data');
+  //     }
+  //     const result = await response.json();
+  //     setserviceItem(result);
+  //   } catch (error) {
+  //     console.log('Error fetching data:', error);
+  //   }
+  // };
+
+  // const fetchAmenitiesItem = async (id: number) => {
+  //   try {
+  //     const response = await fetch(
+  //       `https://qlphong-tro-production.up.railway.app/rooms/${id}/amenities`,
+  //     );
+  //     if (!response.ok) {
+  //       throw new Error('Failed to fetch data');
+  //     }
+  //     const result = await response.json();
+  //     setamenitiesItem(result);
+  //     console.log(result);
+  //   } catch (error) {
+  //     console.log('Error fetching data:', error);
+  //   }
+  // };
+
+  // const fetchFurnituresItem = async (id: number) => {
+  //   try {
+  //     const response = await fetch(
+  //       `https://qlphong-tro-production.up.railway.app/rooms/${id}/furniture`,
+  //     );
+  //     if (!response.ok) {
+  //       throw new Error('Failed to fetch data');
+  //     }
+  //     const result = await response.json();
+  //     setamenitiesItem(result);
+  //   } catch (error) {
+  //     console.log('Error fetching data:', error);
+  //   }
+  // };
+
+  const handleChangeImage = (image: string) => {
+    console.log('Vap change image');
+    setmainImage(image);
   };
 
   return (
@@ -77,34 +207,43 @@ function DetailScreen({
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View style={styles.container}>
           <Image
-            source={{uri: dataRoom?.rooms.image}}
+            source={{
+              uri: isDataLoaded
+                ? mainImage
+                : 'https://static.thenounproject.com/png/4653780-200.png',
+            }}
             style={styles.imgmain}
-            resizeMode="contain"></Image>
-
+            resizeMode="cover"></Image>
           <View style={styles.borderscroll}>
             <ScrollView
               horizontal={true}
               showsHorizontalScrollIndicator={false}>
-              <View style={styles.borderimg}>
+              <TouchableOpacity
+                style={styles.borderimg}
+                onPress={() => handleChangeImage(dataRoom?.rooms.image || '')}>
                 <Image
-                  source={require('../assets/images/hinhtro.jpg')}
+                  source={{
+                    uri:
+                      dataRoom?.rooms.image ||
+                      'https://static.thenounproject.com/png/4653780-200.png',
+                  }}
                   style={styles.imgsuport}></Image>
-              </View>
-              <View style={styles.borderimg}>
-                <Image
-                  source={require('../assets/images/hinhtro.jpg')}
-                  style={styles.imgsuport}></Image>
-              </View>
-              <View style={styles.borderimg}>
-                <Image
-                  source={require('../assets/images/hinhtro.jpg')}
-                  style={styles.imgsuport}></Image>
-              </View>
-              <View style={styles.borderimg}>
-                <Image
-                  source={require('../assets/images/hinhtro.jpg')}
-                  style={styles.imgsuport}></Image>
-              </View>
+              </TouchableOpacity>
+              {listImage.map((item, index) => (
+                <TouchableOpacity
+                  key={index}
+                  style={styles.borderimg}
+                  onPress={() => handleChangeImage(item)}>
+                  <Image
+                    source={{
+                      uri:
+                        item ||
+                        'https://static.thenounproject.com/png/4653780-200.png',
+                    }}
+                    style={styles.imgsuport}
+                    resizeMode="cover"></Image>
+                </TouchableOpacity>
+              ))}
             </ScrollView>
           </View>
 
@@ -126,7 +265,7 @@ function DetailScreen({
               </Text>
               <Icon4
                 name="heart-circle"
-                style={{marginLeft: 200}}
+                style={{marginLeft: width * 0.45}}
                 size={32}
                 color={iconColor}
                 onPress={handleIconPress}></Icon4>
@@ -179,6 +318,15 @@ function DetailScreen({
                 PHÍ DỊCH VỤ
               </Text>
             </View>
+            <View style={styles.servicedetail}>
+              {serviceItem.map(item => (
+                <CardServiceItem
+                  key={item.id}
+                  id={item.id}
+                  services={item.services}
+                />
+              ))}
+            </View>
           </View>
           {/* Phần chi tiết */}
           <View style={styles.detail}>
@@ -196,7 +344,7 @@ function DetailScreen({
               'https://t4.ftcdn.net/jpg/03/59/58/91/360_F_359589186_JDLl8dIWoBNf1iqEkHxhUeeOulx0wOC5.jpg'
             }></Cardaccount>
           {/* Phần tiện nghi */}
-          <View style={styles.service}>
+          <View style={styles.amenitie}>
             <View style={styles.row}>
               <Icon2
                 name="electrical-services"
@@ -206,15 +354,67 @@ function DetailScreen({
                 TIỆN NGHI
               </Text>
             </View>
+            <View style={styles.servicedetail}>
+              {amenitiesItem.map((item, index) => (
+                <View style={styles.cardamenities} key={index}>
+                  <View style={{alignItems: 'center'}}>
+                    <Image
+                      style={{width: 24, height: 24}}
+                      resizeMode="contain"
+                      source={{uri: item.amenities.icon}}
+                    />
+                  </View>
+                  <View
+                    style={{
+                      flex: 1,
+                      alignItems: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 10,
+                        fontWeight: 'bold',
+                      }}>
+                      {item.amenities.amenity_name}
+                    </Text>
+                  </View>
+                </View>
+              ))}
+            </View>
           </View>
           {/* Phần nội thất */}
-          <View style={styles.service}>
+          <View style={styles.furniture}>
             <View style={styles.row}>
               <Icon2
                 name="home-repair-service"
                 size={25}
                 color={orange}></Icon2>
-              <Text style={{marginLeft: 10, fontWeight: 'bold'}}>DỊCH VỤ</Text>
+              <Text style={{marginLeft: 10, fontWeight: 'bold'}}>NỘI THÁT</Text>
+            </View>
+            <View style={styles.servicedetail}>
+              {furnituresItem.map((item, index) => (
+                <View style={styles.cardamenities} key={index}>
+                  <View style={{alignItems: 'center'}}>
+                    <Image
+                      style={{width: 24, height: 24}}
+                      resizeMode="contain"
+                      source={{uri: item.furniture.icon}}
+                    />
+                  </View>
+                  <View
+                    style={{
+                      flex: 1,
+                      alignItems: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 10,
+                        fontWeight: 'bold',
+                      }}>
+                      {item.furniture.furniture_name}
+                    </Text>
+                  </View>
+                </View>
+              ))}
             </View>
           </View>
         </View>
@@ -336,7 +536,37 @@ const styles = StyleSheet.create({
   service: {
     marginTop: 5,
     width: '100%',
-    height: height * 0.15,
+    flex: 1,
+    backgroundColor: 'white',
+    //Viền
+    shadowColor: 'black',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 5,
+  },
+  amenitie: {
+    marginTop: 5,
+    width: '100%',
+    flex: 1,
+    backgroundColor: 'white',
+    //Viền
+    shadowColor: 'black',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 5,
+  },
+  furniture: {
+    marginTop: 5,
+    width: '100%',
+    flex: 1,
     backgroundColor: 'white',
     //Viền
     shadowColor: 'black',
@@ -364,5 +594,18 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 5,
   },
-  //Phần thông tin khách hàng
+  servicedetail: {
+    width: width,
+    height: '80%',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    flexWrap: 'wrap',
+    marginBottom: 20,
+    marginTop: 10,
+  },
+  cardamenities: {
+    width: width * 0.2,
+    height: height * 0.1,
+    margin: 2,
+  },
 });

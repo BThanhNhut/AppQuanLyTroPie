@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import {styles} from './styles/HomeStyle';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Icon2 from 'react-native-vector-icons/MaterialIcons';
 import Icon3 from 'react-native-vector-icons/FontAwesome5';
 import CardSearch from '../components/CardSearch';
 import Slider from '../components/Slider';
@@ -59,8 +58,7 @@ export default function HomeScreen({navigation}: any): React.JSX.Element {
   const onpressDetail = (id: number) => {
     console.log('vào detail');
     navigation.navigate('DetailScreen', {
-      itemId: 86,
-      otherParam: id,
+      id_post: id,
     });
   };
 

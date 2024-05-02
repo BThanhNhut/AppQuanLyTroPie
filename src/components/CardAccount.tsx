@@ -1,4 +1,5 @@
-import React from 'react';
+import axios from 'axios';
+import React, {useEffect, useRef} from 'react';
 import {View, StyleSheet, Dimensions, Image, Text} from 'react-native';
 import Icon5 from 'react-native-vector-icons/AntDesign';
 
@@ -10,6 +11,24 @@ type PropName = {
 };
 
 function CardAccount({name, avatar}: PropName) {
+  const countPost = useRef(0);
+  const id_account = 1;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `https://qlphong-tro-production.up.railway.app/posts/count/${id_account}`,
+        );
+        countPost.current = response.data;
+        console.log(response.data);
+      } catch (error) {
+        console.error('fetch api error' + error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.row}>
@@ -17,7 +36,7 @@ function CardAccount({name, avatar}: PropName) {
         <View style={styles.row}>
           <View>
             <Text style={styles.txt}>{name}</Text>
-            <Text style={styles.txt1}> 5 bài đăng</Text>
+            <Text style={styles.txt1}> {countPost.current} bài đăng</Text>
           </View>
           <Icon5
             name="right"

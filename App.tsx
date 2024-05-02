@@ -31,6 +31,7 @@ import TabsNavigator from './src/navigations/TabsNavigator';
 import {NavigationContainer} from '@react-navigation/native';
 import {SearchProvider} from './src/contexts/SearchContext';
 import DetailScreen from './src/screens/DetailScreen';
+import {AlertNotificationRoot} from 'react-native-alert-notification';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -65,7 +66,9 @@ function Section({children, title}: SectionProps): React.JSX.Element {
 function App(): React.JSX.Element {
   return (
     <SearchProvider>
-      <MainNavigation />
+      <AlertNotificationRoot>
+        <MainNavigation />
+      </AlertNotificationRoot>
     </SearchProvider>
   );
 }

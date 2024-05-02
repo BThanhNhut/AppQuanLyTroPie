@@ -31,15 +31,17 @@ export type CardServiceProps = {
 // addroom
 
 export type ServiceItem = {
-  name: string;
-  price: number;
-  measure: string;
-  icon: string;
+  id: number;
+  service_name: string;
+  cost: number;
   note: string;
+  icon: string;
+  status: boolean;
 };
 
 export type CardServiceItemProps = {
-  service: ServiceItem;
+  id: number;
+  services: ServiceItem;
 };
 
 export type District = {
@@ -55,6 +57,7 @@ type Types = {
 };
 
 type Room = {
+  id: number;
   name_room: string;
   address: string;
   room_price: number;
@@ -92,3 +95,29 @@ export type cardPostProps = {
   onPress: (id: number) => void;
 };
 //  onPress: (event: GestureResponderEvent) => void;
+
+// Detail
+
+export type Amenities = {
+  id: number;
+  amenity_name: string;
+  icon: string;
+  status: boolean;
+};
+
+export type AmenitiesItem = {
+  id: number;
+  amenities: Amenities;
+};
+
+export type Furniture = {
+  id: number;
+  furniture_name: string;
+  icon: string;
+  status: boolean;
+};
+
+export type FurnitureItem = {
+  id: number;
+  furniture: Furniture;
+};
