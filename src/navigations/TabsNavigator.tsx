@@ -1,8 +1,8 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 // Các component
-import cards from '../components/DialogProvince';
 import CardAdd from '../components/CardAdd';
+import CreateRoom from '../screens/CreateRoom';
 
 import HomeScreen from '../screens/HomeScreen';
 
@@ -63,8 +63,8 @@ function TabsNavigator() {
       />
 
       <Tab.Screen
-        name="Add"
-        component={HomeScreen}
+        name="CreateRoom"
+        component={CreateRoom}
         options={({navigation}) => ({
           tabBarItemStyle: {
             height: 0,

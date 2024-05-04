@@ -7,6 +7,9 @@ import SplashScreen from '../screens/SplashScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import TabsNavigator from './TabsNavigator';
 import DetailScreen from '../screens/DetailScreen';
+import CreateRoom from '../screens/CreateRoom';
+import ManagementPost from '../screens/ManagementPost';
+import RentalPost from '../screens/RentalPost';
 
 const Stack = createNativeStackNavigator();
 export default function MainNavigation() {
@@ -21,6 +24,9 @@ export default function MainNavigation() {
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="DetailScreen" component={DetailScreen} />
+        <Stack.Screen name="CreateRoom" component={CreateRoom} />
+        <Stack.Screen name="ManagementPost" component={ManagementPost} />
+        <Stack.Screen name="RentalPost" component={RentalPost} />
       </Stack.Navigator>
     </NavigationContainer>
   );

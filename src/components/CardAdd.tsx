@@ -4,7 +4,7 @@ import {Colors} from '../assets/Colors';
 
 function CardAdd({navigation}: any) {
   const goToMenu = () => {
-    navigation.navigate('MenuAdd');
+    navigation.navigate('ManagementPost');
   };
 
   return (
