@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -12,10 +12,13 @@ import {
 import {Colors} from '../assets/Colors';
 // import CardServiceItem from '../components/cardserviceitem';
 import Icon5 from 'react-native-vector-icons/AntDesign';
+import axios from 'axios';
+import {CardServiceItemProps} from '../assets/types/PropTypes';
 
 const {width, height} = Dimensions.get('window');
 
 function CreateRoom() {
+  const [serviceItem, setserviceItem] = useState<CardServiceItemProps[]>([]);
   const data = [
     'Item 1',
     'Item 2',
@@ -27,12 +30,21 @@ function CreateRoom() {
     // Thêm nhiều mục khác nếu cần
   ];
 
-  const itemcard = {
-    name: 'Điện',
-    price: 10000,
-    measure: 'kwh',
-    icon: 'abcxbz',
-    note: 'đây là note',
+  const id_post = 1;
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const responese = await axios.get(
+        `https://qlphong-tro-production.up.railway.app/rooms/${id_post}/services`,
+      );
+      setserviceItem(responese.data);
+    } catch (error) {
+      console.log('fetch data error', error);
+    }
   };
 
   return (
@@ -41,11 +53,12 @@ function CreateRoom() {
         {/* Thông tin phòng */}
         <View style={styles.card}>
           <Text style={styles.title}>Thông tin phòng</Text>
+
           <View style={styles.box}>
             <Text style={styles.label}> Số/Tên phòng</Text>
             <View style={styles.row}>
               <Image
-                source={require('../assets/images/Add.png')}
+                source={require('../assets/images/icon/tenphong.png')}
                 style={styles.icon}
                 resizeMode="contain"></Image>
               <TextInput
@@ -58,7 +71,7 @@ function CreateRoom() {
             <Text style={styles.label}> Địa chỉ</Text>
             <View style={styles.row}>
               <Image
-                source={require('../assets/images/Add.png')}
+                source={require('../assets/images/icon/diachi.png')}
                 style={styles.icon}
                 resizeMode="contain"></Image>
               <TextInput
@@ -71,7 +84,7 @@ function CreateRoom() {
             <Text style={styles.label}> Giá phòng</Text>
             <View style={styles.row}>
               <Image
-                source={require('../assets/images/Add.png')}
+                source={require('../assets/images/icon/giaphong.png')}
                 style={styles.icon}
                 resizeMode="contain"></Image>
               <TextInput
@@ -84,7 +97,7 @@ function CreateRoom() {
             <Text style={styles.label}> Tiền cọc</Text>
             <View style={styles.row}>
               <Image
-                source={require('../assets/images/Add.png')}
+                source={require('../assets/images/icon/giaphong.png')}
                 style={styles.icon}
                 resizeMode="contain"></Image>
               <TextInput
@@ -98,9 +111,14 @@ function CreateRoom() {
           <Text style={styles.title}>Thông tin dịch vụ</Text>
 
           <View style={styles.container2}>
-            {data.map((item, index) => (
-              //   <CardServiceItem key={index} service={itemcard}></CardServiceItem>
-              <View></View>
+            {serviceItem.map((item, index) => (
+              <View
+                style={{
+                  width: 50,
+                  height: 50,
+                  backgroundColor: 'red',
+                  margin: 10,
+                }}></View>
             ))}
           </View>
         </View>
@@ -301,6 +319,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   icon: {
+    width: 24,
+    height: 24,
     marginLeft: 15,
     marginRight: 10,
   },
