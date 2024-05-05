@@ -51,10 +51,6 @@ export type District = {
 };
 
 //Home
-type Types = {
-  type_name: string;
-  status: boolean;
-};
 
 type Room = {
   id: number;
@@ -120,4 +116,18 @@ export type Furniture = {
 export type FurnitureItem = {
   id: number;
   furniture: Furniture;
+};
+
+//create room
+
+export type Types = {
+  id: number;
+  type_name: string;
+  status: boolean;
+};
+
+export type ImageSelect = {
+  height: number;
+  uri: string;
+  width: number;
 };

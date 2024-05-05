@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {
   View,
   Text,
@@ -13,24 +13,123 @@ import {Colors} from '../assets/Colors';
 // import CardServiceItem from '../components/cardserviceitem';
 import Icon5 from 'react-native-vector-icons/AntDesign';
 import axios from 'axios';
-import {CardServiceItemProps} from '../assets/types/PropTypes';
+import {
+  Amenities,
+  AmenitiesItem,
+  Furniture,
+  ImageSelect,
+  ServiceItem,
+  Types,
+} from '../assets/types/PropTypes';
+import CardServiceEdit from '../components/CardServiceEdit';
+import {RadioButtonProps, RadioGroup} from 'react-native-radio-buttons-group';
+import ImagePicker from 'react-native-image-crop-picker';
+import storage from '@react-native-firebase/storage';
 
 const {width, height} = Dimensions.get('window');
 
 function CreateRoom() {
-  const [serviceItem, setserviceItem] = useState<CardServiceItemProps[]>([]);
-  const data = [
-    'Item 1',
-    'Item 2',
-    'Item 3',
-    'Item 4',
-    'Item 5',
-    'Item 6',
+  const [serviceItem, setserviceItem] = useState<ServiceItem[]>([]);
+  const [amenities, setamenities] = useState<Amenities[]>([]);
+  const [furniture, setfurniture] = useState<Furniture[]>([]);
 
-    // Thêm nhiều mục khác nếu cần
-  ];
+  const [types, settypes] = useState<Types[]>([]);
+  const [selectedId, setSelectedId] = useState<string | undefined>('0');
+
+  //id button
+  const [selectedButtons, setSelectedButtons] = useState<number[]>([]);
+  const [selectedButtons2, setSelectedButtons2] = useState<number[]>([]);
+
+  const [urlimage, seturlimage] = useState<ImageSelect[]>([]);
+  const [height, setHeight] = useState<number>(100);
+  const [width, setWidth] = useState<number>();
 
   const id_post = 1;
+
+  console.log(selectedButtons2);
+
+  const handleButtonPress = (buttonValue: number) => {
+    if (selectedButtons.includes(buttonValue)) {
+      // Nếu nút đã được chọn trước đó, loại bỏ khỏi mảng selectedButtons
+      setSelectedButtons(selectedButtons.filter(item => item !== buttonValue));
+    } else {
+      // Nếu nút chưa được chọn trước đó, thêm vào mảng selectedButtons
+      setSelectedButtons([...selectedButtons, buttonValue]);
+    }
+  };
+
+  const handleButtonPress2 = (buttonValue: number) => {
+    if (selectedButtons2.includes(buttonValue)) {
+      // Nếu nút đã được chọn trước đó, loại bỏ khỏi mảng selectedButtons
+      setSelectedButtons2(
+        selectedButtons2.filter(item => item !== buttonValue),
+      );
+    } else {
+      // Nếu nút chưa được chọn trước đó, thêm vào mảng selectedButtons
+      setSelectedButtons2([...selectedButtons2, buttonValue]);
+    }
+  };
+
+  const radioButtons: RadioButtonProps[] = useMemo(
+    () =>
+      types.map((item, index) => ({
+        id: `${index}`,
+        label: item.type_name,
+        value: item.id.toString(),
+        size: 16,
+        color: Colors.primary,
+      })),
+    [types],
+  );
+
+  const handleImagePicker = () => {
+    ImagePicker.openPicker({
+      width,
+      height,
+      cropping: true,
+      multiple: true,
+    })
+      .then(images => {
+        const selectedImages = images.map(image => ({
+          uri: image.path,
+          width: image.width,
+          height: image.height,
+        }));
+        seturlimage(selectedImages);
+        console.log(selectedImages);
+        uploadImagesToFirebase(selectedImages);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  const uploadImagesToFirebase = async (
+    images: {uri: string; width: number; height: number}[],
+  ) => {
+    try {
+      const promises = images.map(async (image, index) => {
+        const imageName = `image_${index}`;
+        console.log(image);
+
+        // Xây dựng đường dẫn đầy đủ đến thư mục bạn muốn lưu trữ hình ảnh
+        const imageRef = storage().ref().child(`images/${imageName}`);
+
+        // Tải tệp hình ảnh lên Firebase Storage
+        const response = await fetch(image.uri);
+        const blob = await response.blob();
+        await imageRef.put(blob);
+
+        // Lấy URL của hình ảnh đã tải lên
+        const url = await imageRef.getDownloadURL();
+        return {url, imageName};
+      });
+      const uploadedImages = await Promise.all(promises);
+      console.log('Uploaded Images:', uploadedImages);
+    } catch (error) {
+      console.error('Error uploading images to Firebase:', error);
+    }
+  };
 
   useEffect(() => {
     fetchData();
@@ -38,10 +137,18 @@ function CreateRoom() {
 
   const fetchData = async () => {
     try {
-      const responese = await axios.get(
-        `https://qlphong-tro-production.up.railway.app/rooms/${id_post}/services`,
-      );
-      setserviceItem(responese.data);
+      const responses = await Promise.all([
+        axios.get(`https://qlphong-tro-production.up.railway.app/services`),
+        axios.get(`https://qlphong-tro-production.up.railway.app/furniture`),
+        axios.get(`https://qlphong-tro-production.up.railway.app/amenities`),
+        axios.get(`https://qlphong-tro-production.up.railway.app/types`),
+      ]);
+
+      setserviceItem(responses[0].data);
+      setfurniture(responses[1].data);
+      setamenities(responses[2].data);
+      settypes(responses[3].data);
+      console.log(responses[2].data);
     } catch (error) {
       console.log('fetch data error', error);
     }
@@ -76,7 +183,7 @@ function CreateRoom() {
                 resizeMode="contain"></Image>
               <TextInput
                 style={styles.input}
-                placeholder="Nhập số/ tên phòng"></TextInput>
+                placeholder="Nhập địa chỉ"></TextInput>
             </View>
           </View>
 
@@ -89,7 +196,8 @@ function CreateRoom() {
                 resizeMode="contain"></Image>
               <TextInput
                 style={styles.input}
-                placeholder="Nhập số/ tên phòng"></TextInput>
+                placeholder="nhập giá phòng"
+                keyboardType="numeric"></TextInput>
             </View>
           </View>
 
@@ -102,7 +210,8 @@ function CreateRoom() {
                 resizeMode="contain"></Image>
               <TextInput
                 style={styles.input}
-                placeholder="Nhập số/ tên phòng"></TextInput>
+                placeholder="Nhập tiền cọc"
+                keyboardType="numeric"></TextInput>
             </View>
           </View>
         </View>
@@ -112,36 +221,65 @@ function CreateRoom() {
 
           <View style={styles.container2}>
             {serviceItem.map((item, index) => (
-              <View
-                style={{
-                  width: 50,
-                  height: 50,
-                  backgroundColor: 'red',
-                  margin: 10,
-                }}></View>
+              <CardServiceEdit key={index} services={item} />
             ))}
           </View>
         </View>
 
         <View style={styles.card}>
           <Text style={styles.title}>Thông tin bài đăng</Text>
+          <Text
+            style={{color: Colors.silver1, marginLeft: 10, marginBottom: 10}}>
+            Loại phòng
+          </Text>
           <View style={styles.container2}>
-            {data.map((item, index) => (
+            {/* {types.map((item, index) => (
               <TouchableOpacity
                 key={index}
-                style={styles.typeroom}
-                activeOpacity={0.8}>
-                <Text>xin chào</Text>
+                style={[styles.typeroom]}
+                activeOpacity={0.8}
+                onPress={handlePressType}>
+                <Text>{item.type_name}</Text>
               </TouchableOpacity>
-            ))}
+            ))} */}
+            <RadioGroup
+              radioButtons={radioButtons}
+              onPress={setSelectedId}
+              selectedId={selectedId}
+              layout="row"
+            />
           </View>
           <View style={styles.rowonly}>
-            <TouchableOpacity style={styles.camera} activeOpacity={0.7}>
+            <TouchableOpacity
+              style={styles.camera}
+              activeOpacity={0.7}
+              onPress={handleImagePicker}>
               <Icon5 name="camerao" size={25} color={Colors.primary}></Icon5>
             </TouchableOpacity>
-            <View style={{padding: 10, marginTop: height * 0.05}}>
-              <Text>Ảnh phòng</Text>
-              <Text>Tối đa 10 ảnh</Text>
+            <View style={{padding: 10, marginTop: height * 0.26}}>
+              {urlimage.length > 0 ? (
+                <View>
+                  <ScrollView
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}>
+                    {urlimage.map((item, index) => (
+                      <Image
+                        source={{uri: item.uri}}
+                        style={{
+                          width: 100,
+                          height: 100,
+                          marginRight: 10,
+                          borderRadius: 10,
+                        }}
+                      />
+                    ))}
+                  </ScrollView>
+                </View>
+              ) : (
+                <View>
+                  <Text>Chọn dưới 10 tấm</Text>
+                </View>
+              )}
             </View>
           </View>
 
@@ -149,25 +287,38 @@ function CreateRoom() {
             <Text style={[styles.label]}> Giới tính </Text>
             <View style={styles.row}>
               <Image
-                source={require('../assets/images/Add.png')}
+                source={require('../assets/images/icon/gioitinh.png')}
                 style={styles.icon}
                 resizeMode="contain"></Image>
               <TextInput
                 style={styles.input}
-                placeholder="Nhập số/ tên phòng"></TextInput>
+                placeholder="Nhập giới tính"></TextInput>
             </View>
           </View>
 
           <View style={[styles.box, {marginTop: 20}]}>
-            <Text style={[styles.label]}> Diện tích </Text>
+            <Text style={[styles.label]}> Chiều dài (m) </Text>
             <View style={styles.row}>
               <Image
-                source={require('../assets/images/Add.png')}
+                source={require('../assets/images/icon/dientich.png')}
                 style={styles.icon}
                 resizeMode="contain"></Image>
               <TextInput
                 style={styles.input}
-                placeholder="Nhập số/ tên phòng"></TextInput>
+                placeholder="Nhập chiều dài"></TextInput>
+            </View>
+          </View>
+
+          <View style={[styles.box, {marginTop: 20}]}>
+            <Text style={[styles.label]}> Chiều rộng (m) </Text>
+            <View style={styles.row}>
+              <Image
+                source={require('../assets/images/icon/dientich.png')}
+                style={styles.icon}
+                resizeMode="contain"></Image>
+              <TextInput
+                style={styles.input}
+                placeholder="Nhập chiều động"></TextInput>
             </View>
           </View>
 
@@ -175,12 +326,13 @@ function CreateRoom() {
             <Text style={styles.label}> Số điện thoại</Text>
             <View style={styles.row}>
               <Image
-                source={require('../assets/images/Add.png')}
+                source={require('../assets/images/icon/sodienthoai.png')}
                 style={styles.icon}
                 resizeMode="contain"></Image>
               <TextInput
                 style={styles.input}
-                placeholder="Nhập số/ tên phòng"></TextInput>
+                placeholder="Nhập số điện thử"
+                keyboardType="numeric"></TextInput>
             </View>
           </View>
 
@@ -188,12 +340,13 @@ function CreateRoom() {
             <Text style={styles.label}> Tầng</Text>
             <View style={styles.row}>
               <Image
-                source={require('../assets/images/Add.png')}
+                source={require('../assets/images/icon/tang.png')}
                 style={styles.icon}
                 resizeMode="contain"></Image>
               <TextInput
                 style={styles.input}
-                placeholder="Nhập số/ tên phòng"></TextInput>
+                placeholder="Nhập tầng"
+                keyboardType="numeric"></TextInput>
             </View>
           </View>
 
@@ -201,12 +354,13 @@ function CreateRoom() {
             <Text style={styles.label}> Sức chứa </Text>
             <View style={styles.row}>
               <Image
-                source={require('../assets/images/Add.png')}
+                source={require('../assets/images/icon/suchua.png')}
                 style={styles.icon}
                 resizeMode="contain"></Image>
               <TextInput
                 style={styles.input}
-                placeholder="Nhập số/ tên phòng"></TextInput>
+                placeholder="Nhập sức chứa"
+                keyboardType="numeric"></TextInput>
             </View>
           </View>
 
@@ -214,12 +368,10 @@ function CreateRoom() {
             <Text style={styles.label}> Mô tả</Text>
             <View style={styles.row}>
               <Image
-                source={require('../assets/images/Add.png')}
+                source={require('../assets/images/icon/mota.png')}
                 style={styles.icon}
                 resizeMode="contain"></Image>
-              <TextInput
-                style={styles.input}
-                placeholder="Nhập số/ tên phòng"></TextInput>
+              <TextInput style={styles.input} placeholder="Mô tả"></TextInput>
             </View>
           </View>
 
@@ -227,12 +379,13 @@ function CreateRoom() {
             <Text style={styles.label}> Số chỗ để xe</Text>
             <View style={styles.row}>
               <Image
-                source={require('../assets/images/Add.png')}
+                source={require('../assets/images/icon/bike.png')}
                 style={styles.icon}
                 resizeMode="contain"></Image>
               <TextInput
                 style={styles.input}
-                placeholder="Nhập số/ tên phòng"></TextInput>
+                placeholder="Nhập số chỗ để xe"
+                keyboardType="numeric"></TextInput>
             </View>
           </View>
 
@@ -245,16 +398,18 @@ function CreateRoom() {
           </View>
 
           <View style={styles.container3}>
-            {data.map((item, index) => (
+            {amenities.map((item, index) => (
               <TouchableOpacity
                 key={index}
-                style={styles.convenientcard}
-                activeOpacity={0.8}>
-                {/* <Image
-                  source={require('../assets/icons8-room-24.png')}
-                  style={styles.icon}
-                  resizeMode="contain"></Image> */}
-                <Text>xin chào</Text>
+                style={[
+                  styles.button,
+                  selectedButtons.includes(item.id) && styles.selectedButton,
+                ]}
+                onPress={() => handleButtonPress(item.id)}>
+                <Image
+                  source={require('../assets/images/icon/Add.png')}
+                  style={{width: 24, height: 24}}></Image>
+                <Text>{item.amenity_name}</Text>
               </TouchableOpacity>
             ))}
           </View>
@@ -268,16 +423,18 @@ function CreateRoom() {
           </View>
 
           <View style={styles.container3}>
-            {data.map((item, index) => (
+            {furniture.map((item, index) => (
               <TouchableOpacity
                 key={index}
-                style={styles.convenientcard}
-                activeOpacity={0.8}>
-                {/* <Image
-                  source={require('../assets/icons8-room-24.png')}
-                  style={styles.icon}
-                  resizeMode="contain"></Image> */}
-                <Text>xin chào</Text>
+                style={[
+                  styles.button,
+                  selectedButtons2.includes(item.id) && styles.selectedButton,
+                ]}
+                onPress={() => handleButtonPress2(item.id)}>
+                <Image
+                  source={require('../assets/images/icon/Add.png')}
+                  style={{width: 24, height: 24}}></Image>
+                <Text>{item.furniture_name}</Text>
               </TouchableOpacity>
             ))}
           </View>
@@ -342,12 +499,12 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
   },
   container2: {
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
   container3: {
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
@@ -355,7 +512,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: '30%',
     height: 30,
-    margin: 2,
+    margin: 5,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
@@ -382,5 +539,22 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     flexDirection: 'row',
     borderColor: Colors.silver2,
+  },
+  // thiet lap
+  button: {
+    marginLeft: 10,
+    width: width * 0.45,
+    height: height * 0.05,
+    paddingHorizontal: 20,
+    margin: 5,
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: Colors.silver,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  selectedButton: {
+    // Màu của nút khi được chọn
+    borderColor: Colors.primary,
   },
 });
