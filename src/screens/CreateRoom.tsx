@@ -292,7 +292,8 @@ function CreateRoom() {
                 resizeMode="contain"></Image>
               <TextInput
                 style={styles.input}
-                placeholder="Nhập giới tính"></TextInput>
+                placeholder="Nhập giới tính"
+                keyboardType="numeric"></TextInput>
             </View>
           </View>
 
@@ -305,7 +306,8 @@ function CreateRoom() {
                 resizeMode="contain"></Image>
               <TextInput
                 style={styles.input}
-                placeholder="Nhập chiều dài"></TextInput>
+                placeholder="Nhập chiều dài"
+                keyboardType="numeric"></TextInput>
             </View>
           </View>
 
