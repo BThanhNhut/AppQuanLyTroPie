@@ -11,6 +11,7 @@ import CreateRoom from '../screens/CreateRoom';
 import ManagementPost from '../screens/ManagementPost';
 import RentalPost from '../screens/RentalPost';
 import CreatePost from '../screens/CreatePost';
+import MessageScreen from '../screens/MessageScreen';
 
 const Stack = createNativeStackNavigator();
 export default function MainNavigation() {

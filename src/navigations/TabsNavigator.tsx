@@ -10,6 +10,8 @@ import {View, Text, StyleSheet, Image} from 'react-native';
 import HeaderService from '../navigations/HeaderNavigator/HeaderService';
 import HeaderMessage from '../navigations/HeaderNavigator/HeaderMessage';
 import {Colors} from '../assets/Colors';
+import MessageScreen from '../screens/MessageScreen';
+import AccountScreen from '../screens/AccountScreen';
 
 const Tab = createBottomTabNavigator();
 const getIconColor = (focused: Boolean) => ({
@@ -74,8 +76,8 @@ function TabsNavigator() {
       />
 
       <Tab.Screen
-        name="Message"
-        component={HomeScreen}
+        name="MessageScreen"
+        component={MessageScreen}
         options={{
           headerShown: true,
           tabBarItemStyle: {
@@ -93,8 +95,8 @@ function TabsNavigator() {
         }}
       />
       <Tab.Screen
-        name="Account"
-        component={HomeScreen}
+        name="AccountScreen"
+        component={AccountScreen}
         options={{
           tabBarItemStyle: {
             height: 0,
