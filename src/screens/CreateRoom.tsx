@@ -264,6 +264,7 @@ function CreateRoom() {
                     showsHorizontalScrollIndicator={false}>
                     {urlimage.map((item, index) => (
                       <Image
+                        key={index}
                         source={{uri: item.uri}}
                         style={{
                           width: 100,
