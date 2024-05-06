@@ -10,6 +10,7 @@ import DetailScreen from '../screens/DetailScreen';
 import CreateRoom from '../screens/CreateRoom';
 import ManagementPost from '../screens/ManagementPost';
 import RentalPost from '../screens/RentalPost';
+import CreatePost from '../screens/CreatePost';
 
 const Stack = createNativeStackNavigator();
 export default function MainNavigation() {
@@ -27,6 +28,7 @@ export default function MainNavigation() {
         <Stack.Screen name="CreateRoom" component={CreateRoom} />
         <Stack.Screen name="ManagementPost" component={ManagementPost} />
         <Stack.Screen name="RentalPost" component={RentalPost} />
+        <Stack.Screen name="CreatePost" component={CreatePost} />
       </Stack.Navigator>
     </NavigationContainer>
   );

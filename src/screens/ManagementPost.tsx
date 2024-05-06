@@ -14,7 +14,7 @@ const {width, height} = Dimensions.get('window');
 
 export default function ManagementPost({navigation}: any): React.JSX.Element {
   const gotoRentalPost = () => {
-    navigation.navigate('RentalPost');
+    navigation.navigate('CreatePost');
   };
   return (
     <View style={styles.container}>

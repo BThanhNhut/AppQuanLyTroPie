@@ -131,3 +131,9 @@ export type ImageSelect = {
   uri: string;
   width: number;
 };
+
+//CreatePost
+export type roomsid_name = {
+  id: string;
+  name_room: string;
+};
