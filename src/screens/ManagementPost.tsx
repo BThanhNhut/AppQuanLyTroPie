@@ -14,7 +14,7 @@ const {width, height} = Dimensions.get('window');
 
 export default function ManagementPost({navigation}: any): React.JSX.Element {
   const gotoRentalPost = () => {
-    navigation.navigate('CreatePost');
+    navigation.navigate('RentalPost');
   };
   return (
     <View style={styles.container}>
@@ -33,7 +33,7 @@ export default function ManagementPost({navigation}: any): React.JSX.Element {
           style={styles.img}
           source={require('../assets/images/icon/ogep.png')}
           resizeMode="contain"></Image>
-        <Text style={styles.txt}>ở ghép</Text>
+        <Text style={styles.txt}>Ở ghép</Text>
       </TouchableOpacity>
     </View>
   );

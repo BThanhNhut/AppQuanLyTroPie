@@ -3,6 +3,7 @@ import {GestureResponderEvent} from 'react-native';
 export type ItemMenu = {
   nameIcon: any;
   text: string;
+  screen: string;
 };
 
 export type CustomModalProps = {
@@ -29,7 +30,6 @@ export type CardServiceProps = {
 };
 
 // addroom
-
 export type ServiceItem = {
   id: number;
   service_name: string;
@@ -51,7 +51,6 @@ export type District = {
 };
 
 //Home
-
 type Room = {
   id: number;
   name_room: string;
@@ -72,11 +71,11 @@ type Room = {
   types: Types;
 };
 
-type Account = {
-  id: number;
-  customer_name: string;
-  avatar: string;
-};
+// type Account = {
+//   id: number;
+//   customer_name: string;
+//   avatar: string;
+// };
 
 export type Posts = {
   id: number;
@@ -136,4 +135,27 @@ export type ImageSelect = {
 export type roomsid_name = {
   id: string;
   name_room: string;
+};
+
+//favorite
+export type favoriteItem = {
+  id: number;
+  posts: Posts;
+};
+
+//Login
+export type Account = {
+  id: number;
+  username: string;
+  password: string;
+  customer_name: string;
+  phone_number: string;
+  address: string;
+  avatar: string;
+};
+
+export type AccountLogin = {
+  msg: string;
+  access_token: string;
+  account: Account;
 };

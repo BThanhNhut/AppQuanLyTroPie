@@ -29,10 +29,7 @@ export default function CardSearchMenu({navigation}: any) {
   const searchContext = useContext(SearchContext);
 
   const onPressSearch = () => {
-    console.log('xin chao');
-  };
-  const onpressDetail = () => {
-    navigation.navigate('Detail');
+    navigation.navigate('PostScreen');
   };
 
   return (

@@ -8,11 +8,11 @@ import {
 } from 'react-native';
 import {Colors} from '../../assets/Colors';
 import Icon5 from 'react-native-vector-icons/AntDesign';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const {width, height} = Dimensions.get('window');
 
-function HeaderPost({navigation}: any) {
+function HeaderRentalPost({navigation}: any) {
   const goBack = () => {
     navigation.goBack();
   };
@@ -26,15 +26,13 @@ function HeaderPost({navigation}: any) {
             color={Colors.white}
             onPress={goBack}></Icon5>
         </TouchableOpacity>
-        <Text style={styles.title}> Tin đăng</Text>
-        <TouchableOpacity>
-          <Icon name="filter" size={32} color={Colors.white}></Icon>
-        </TouchableOpacity>
+        <Text style={styles.title}> Bài đăng cho thuê phòng</Text>
+        <Icon name="add" size={22} color={Colors.white}></Icon>
       </View>
     </View>
   );
 }
-export default HeaderPost;
+export default HeaderRentalPost;
 
 const styles = StyleSheet.create({
   container: {
@@ -52,12 +50,13 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   row: {
-    marginTop: 20,
+    marginTop: 17,
     width: width,
     height: '80%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 10,
+    paddingTop: 15,
   },
   title: {
     fontSize: 23,

@@ -51,10 +51,6 @@ export default function HomeScreen({navigation}: any): React.JSX.Element {
     }
   };
 
-  const onPressSearch = () => {
-    console.log('xin chao');
-    console.log(data);
-  };
   const onpressDetail = (id: number) => {
     console.log('vào detail');
     navigation.navigate('DetailScreen', {
@@ -116,7 +112,7 @@ export default function HomeScreen({navigation}: any): React.JSX.Element {
           <Slider></Slider>
         </View>
         {/* Card search */}
-        <CardSearchMenu />
+        <CardSearchMenu navigation={navigation} />
         {/*  */}
         <View style={styles.layout2}>
           <View style={styles.row}>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useEffect, useRef} from 'react';
 import {
   Text,
   StyleSheet,
@@ -12,56 +12,25 @@ import {
 import {Colors} from '../assets/Colors';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
-import Icon3 from 'react-native-vector-icons/FontAwesome5';
-import Icon4 from 'react-native-vector-icons/Ionicons';
 import Icon5 from 'react-native-vector-icons/AntDesign';
-import {ItemMenu} from '../assets/types/PropTypes';
+import {listItem} from '../assets/Datas/AcountData';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {AuthContext} from '../contexts/AuthContext';
 
 const {height, width} = Dimensions.get('window');
 
-function AccountScreen(): React.JSX.Element {
-  const listItem: ItemMenu[] = [
-    {
-      nameIcon: require('../assets/images/icon/post.png'),
-      text: 'Quản lý bài đăng',
-    },
-    {
-      nameIcon: require('../assets/images/icon/customer.png'),
-      text: 'Khách hàng tiềm năng',
-    },
-    {
-      nameIcon: require('../assets/images/icon/managercustomer.png'),
-      text: 'Quản lý người thuê',
-    },
-    {
-      nameIcon: require('../assets/images/icon/contract.png'),
-      text: 'Quản lý hợp đồng',
-    },
-    {
-      nameIcon: require('../assets/images/icon/bill.png'),
-      text: 'Quản lý hóa đơn',
-    },
-    {
-      nameIcon: require('../assets/images/icon/analytics.png'),
-      text: 'Báo cáo thống kê',
-    },
-    {
-      nameIcon: require('../assets/images/icon/armchair.png'),
-      text: 'Giữ chỗ',
-    },
-    {
-      nameIcon: require('../assets/images/icon/report.png'),
-      text: 'Báo cáo sữ cố',
-    },
-    {
-      nameIcon: require('../assets/images/icon/auction.png'),
-      text: 'Điều khoảng chính sách',
-    },
-    {
-      nameIcon: require('../assets/images/icon/exit.png'),
-      text: 'Đăng xuất',
-    },
-  ];
+function AccountScreen({navigation}: any): React.JSX.Element {
+  const authContext = useContext(AuthContext);
+
+  const goToCreateRoom = () => {
+    navigation.navigate('CreateRoom');
+  };
+  const goToCreatePost = () => {
+    navigation.navigate('CreatePost');
+  };
+  const goTo = (name: string) => {
+    navigation.navigate(name);
+  };
 
   return (
     <View style={styles.container}>
@@ -89,7 +58,9 @@ function AccountScreen(): React.JSX.Element {
               style={styles.img}></Image>
             <View>
               <Text style={styles.txttitleava}>Xin chào</Text>
-              <Text style={styles.txtname}>Biện Thanh Nhựt</Text>
+              <Text style={styles.txtname}>
+                {authContext?.account?.customer_name}
+              </Text>
             </View>
             <View style={styles.border2}>
               <Icon name="headphones" size={32} color={Colors.white}></Icon>
@@ -127,7 +98,8 @@ function AccountScreen(): React.JSX.Element {
             <View style={styles.rowcreate}>
               <TouchableOpacity
                 style={styles.colborderinfo}
-                activeOpacity={0.8}>
+                activeOpacity={0.8}
+                onPress={goToCreateRoom}>
                 <Image
                   source={require('../assets/images/icon/taophong.png')}
                   resizeMode="contain"
@@ -136,7 +108,8 @@ function AccountScreen(): React.JSX.Element {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.colborderinfo}
-                activeOpacity={0.8}>
+                activeOpacity={0.8}
+                onPress={goToCreatePost}>
                 <Image
                   source={require('../assets/images/icon/addpost.png')}
                   resizeMode="contain"
@@ -171,7 +144,8 @@ function AccountScreen(): React.JSX.Element {
               <TouchableOpacity
                 style={styles.row2}
                 key={index}
-                activeOpacity={0.8}>
+                activeOpacity={0.8}
+                onPress={() => goTo(item.screen)}>
                 <Image
                   source={item.nameIcon}
                   resizeMode="contain"

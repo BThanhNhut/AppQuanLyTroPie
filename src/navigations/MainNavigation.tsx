@@ -12,6 +12,15 @@ import ManagementPost from '../screens/ManagementPost';
 import RentalPost from '../screens/RentalPost';
 import CreatePost from '../screens/CreatePost';
 import MessageScreen from '../screens/MessageScreen';
+import HeaderService from './HeaderNavigator/HeaderService';
+import HeaderManagementPost from './HeaderNavigator/HeaderManagementPost';
+import HeaderRentalPost from './HeaderNavigator/HeaderRentalPost';
+import HeaderCreatePost from './HeaderNavigator/HeaderCreatePost';
+import HeaderCreateRoom from './HeaderNavigator/HeaderCreateRoom';
+import FavoriteScreen from '../screens/FavoriteScreen';
+import HeaderFavorite from './HeaderNavigator/HeaderFavorite';
+import PostScreen from '../screens/PostScreen';
+import HeaderPost from './HeaderNavigator/HeaderPost';
 
 const Stack = createNativeStackNavigator();
 export default function MainNavigation() {
@@ -25,11 +34,56 @@ export default function MainNavigation() {
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
+
         <Stack.Screen name="DetailScreen" component={DetailScreen} />
-        <Stack.Screen name="CreateRoom" component={CreateRoom} />
-        <Stack.Screen name="ManagementPost" component={ManagementPost} />
-        <Stack.Screen name="RentalPost" component={RentalPost} />
-        <Stack.Screen name="CreatePost" component={CreatePost} />
+        <Stack.Screen
+          name="PostScreen"
+          component={PostScreen}
+          options={{
+            headerShown: true,
+            header: ({navigation}) => <HeaderPost navigation={navigation} />,
+          }}
+        />
+        <Stack.Screen
+          name="FavoriteScreen"
+          component={FavoriteScreen}
+          options={{
+            headerShown: true,
+            header: ({navigation}) => (
+              <HeaderFavorite navigation={navigation} />
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="CreateRoom"
+          component={CreateRoom}
+          options={{
+            headerShown: true,
+            header: ({navigation}) => (
+              <HeaderCreatePost navigation={navigation} />
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="RentalPost"
+          component={RentalPost}
+          options={{
+            headerShown: true,
+            header: ({navigation}) => (
+              <HeaderRentalPost navigation={navigation} />
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="CreatePost"
+          component={CreatePost}
+          options={{
+            headerShown: true,
+            header: ({navigation}) => (
+              <HeaderCreatePost navigation={navigation} />
+            ),
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

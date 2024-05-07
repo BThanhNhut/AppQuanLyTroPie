@@ -2,7 +2,6 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 // Các component
 import CardAdd from '../components/CardAdd';
-import CreateRoom from '../screens/CreateRoom';
 
 import HomeScreen from '../screens/HomeScreen';
 
@@ -12,6 +11,9 @@ import HeaderMessage from '../navigations/HeaderNavigator/HeaderMessage';
 import {Colors} from '../assets/Colors';
 import MessageScreen from '../screens/MessageScreen';
 import AccountScreen from '../screens/AccountScreen';
+import ServiceScreen from '../screens/ServiceScreen';
+import ManagementPost from '../screens/ManagementPost';
+import HeaderManagementPost from './HeaderNavigator/HeaderManagementPost';
 
 const Tab = createBottomTabNavigator();
 const getIconColor = (focused: Boolean) => ({
@@ -28,7 +30,7 @@ function TabsNavigator() {
         tabBarStyle: styles.tabBar,
       }}>
       <Tab.Screen
-        name="Home"
+        name="HomeScreen"
         component={HomeScreen}
         options={{
           tabBarItemStyle: {
@@ -45,8 +47,8 @@ function TabsNavigator() {
         }}
       />
       <Tab.Screen
-        name="Service"
-        component={HomeScreen}
+        name="ServiceScreen"
+        component={ServiceScreen}
         options={{
           headerShown: true,
           tabBarItemStyle: {
@@ -65,13 +67,17 @@ function TabsNavigator() {
       />
 
       <Tab.Screen
-        name="CreateRoom"
-        component={CreateRoom}
+        name="ManagementPost"
+        component={ManagementPost}
         options={({navigation}) => ({
+          headerShown: true,
           tabBarItemStyle: {
             height: 0,
           },
           tabBarButton: () => <CardAdd navigation={navigation} />,
+          header: ({navigation}) => (
+            <HeaderManagementPost navigation={navigation} />
+          ),
         })}
       />
 

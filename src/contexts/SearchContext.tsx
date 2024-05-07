@@ -34,6 +34,6 @@ export function SearchProvider({children}: {children: ReactNode}) {
   );
 }
 
-export const useData = () => {
-  return useContext(SearchContext);
-};
+// export const useData = () => {
+//   return useContext(SearchContext);
+// };

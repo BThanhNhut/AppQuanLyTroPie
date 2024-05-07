@@ -8,11 +8,10 @@ function Splash({navigation}: any): React.JSX.Element {
     try {
       const status = await AsyncStorage.getItem('username');
       if (status) {
-        console.log('Kết quả' + status);
-        navigation.replace('LoginScreen');
+        navigation.replace('TabsNavigator');
       } else {
         console.log('haha');
-        navigation.replace('TabsNavigator');
+        navigation.replace('LoginScreen');
       }
     } catch (error) {
       console.log('Lỗi là :' + error);

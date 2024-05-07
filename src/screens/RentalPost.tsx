@@ -1,55 +1,67 @@
+import React, {useEffect, useRef, useState} from 'react';
 import {
-  Dimensions,
-  Image,
-  StyleSheet,
+  View,
   Text,
+  Image,
   TextInput,
   TouchableOpacity,
-  View,
+  StyleSheet,
   useWindowDimensions,
+  ScrollView,
 } from 'react-native';
-import {Colors} from '../assets/Colors';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
-import React, {useRef} from 'react';
+import axios from 'axios';
+import {Posts} from '../assets/types/PropTypes'; // Kiểu dữ liệu của posts
+import {Colors} from '../assets/Colors';
+import CardPost from '../components/CardPost';
 
-const {width, height} = Dimensions.get('window');
-
-const FirstRoute = () => (
-  <View style={{flex: 1}}>
-    <Text>adjwsj</Text>
-    <Text>adjwsj</Text>
-  </View>
-);
-const SecondRoute = () => <View style={{flex: 1}} />;
-
-const renderScene = SceneMap({
-  first: FirstRoute,
-  second: SecondRoute,
-});
-
-export default function RentalPost({navigation}: any): React.JSX.Element {
+const RentalPost = ({navigation}: any): React.JSX.Element => {
   const layout = useWindowDimensions();
-  const [index, setIndex] = React.useState(0);
-  const active = useRef(0);
+  const [index, setIndex] = useState(0);
   const hide = useRef(0);
+  const [dataactive, setDatadataactive] = useState<Posts[]>([]);
+  const [dataunactive, setDatadataunactive] = useState<Posts[]>([]);
+  const id_account = 1;
 
-  const [routes] = React.useState([
-    {key: 'first', title: `Đang hoạt động (${active.current})`},
-    {key: 'second', title: `Đã bị ẩn (${hide.current})`},
-  ]);
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const responses = await Promise.all([
+        axios.get(
+          `https://qlphong-tro-production.up.railway.app/posts/listactive/${id_account}`,
+        ),
+        axios.get(
+          `https://qlphong-tro-production.up.railway.app/posts/listunactive/${id_account}`,
+        ),
+      ]);
+      setDatadataactive(responses[0].data);
+      setDatadataunactive(responses[1].data);
+      console.log(dataactive.length);
+    } catch (error) {
+      console.log('fetch data error', error);
+    }
+  };
+
+  const renderScene = SceneMap({
+    first: () => <FirstRoute data={dataactive} />,
+    second: () => <SecondRoute data={dataunactive} />,
+  });
 
   const renderTabBar = (props: any) => (
     <TabBar
       {...props}
-      indicatorStyle={{backgroundColor: Colors.white}} // Đặt màu cho dấu hiệu chỉ ra tab đang được chọn
-      style={{backgroundColor: Colors.primary}} // Đặt màu nền cho thanh tab
-      activeColor={Colors.white} // Màu chữ cho tab được chọn
-      inactiveColor={Colors.silver} // Màu chữ cho tab không được chọn
+      indicatorStyle={{backgroundColor: Colors.white}}
+      style={{backgroundColor: Colors.primary}}
+      activeColor={Colors.white}
+      inactiveColor={Colors.silver}
     />
   );
 
   const gotoCreateRoom = () => {
-    navigation.navigate('CreateRoom');
+    navigation.navigate('CreatePost');
   };
 
   return (
@@ -68,29 +80,66 @@ export default function RentalPost({navigation}: any): React.JSX.Element {
           />
           <TextInput style={styles.txt} placeholder="Tìm kiếm" />
         </View>
-
         <TouchableOpacity
           style={{width: 32, height: 32, marginRight: 10}}
           activeOpacity={0.8}
           onPress={gotoCreateRoom}>
           <Image
             style={{width: '100%', height: '100%'}}
-            source={require('../assets/images/icon/Add.png')}></Image>
+            source={require('../assets/images/icon/Add.png')}
+          />
         </TouchableOpacity>
       </View>
-
       <View style={styles.content}>
         <TabView
-          navigationState={{index, routes}}
+          navigationState={{
+            index,
+            routes: [
+              {key: 'first', title: `Đang hoạt động (${dataactive.length})`},
+              {key: 'second', title: `Đã bị ẩn (${dataunactive.length})`},
+            ],
+          }}
           renderScene={renderScene}
           onIndexChange={setIndex}
           initialLayout={{width: layout.width}}
-          renderTabBar={renderTabBar} // Sử dụng renderTabBar để tô màu cho thanh tab
+          renderTabBar={renderTabBar}
         />
       </View>
     </View>
   );
-}
+};
+
+const FirstRoute = ({data}: {data: Posts[]}) => (
+  <View style={{flex: 1}}>
+    <ScrollView>
+      {data &&
+        data.map((post, index) => (
+          <CardPost
+            key={index}
+            item={post}
+            onPress={() => {
+              console.log('chon phong');
+            }}></CardPost>
+        ))}
+    </ScrollView>
+  </View>
+);
+
+const SecondRoute = ({data}: {data: Posts[]}) => (
+  <View style={{flex: 1}}>
+    <ScrollView>
+      {data &&
+        data.map((post, index) => (
+          <CardPost
+            key={index}
+            item={post}
+            onPress={() => {
+              console.log('chon phong');
+            }}></CardPost>
+        ))}
+    </ScrollView>
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -99,8 +148,8 @@ const styles = StyleSheet.create({
   },
   search: {
     margin: 20,
-    width: width * 0.8,
-    height: height * 0.05,
+    width: '80%',
+    height: '45%',
     backgroundColor: Colors.silver2,
     flexDirection: 'row',
     alignItems: 'center',
@@ -114,9 +163,12 @@ const styles = StyleSheet.create({
   },
   txt: {
     height: '100%',
+    width: '100%',
   },
   content: {
     flex: 1,
-    width: width,
+    width: '100%',
   },
 });
+
+export default RentalPost;
