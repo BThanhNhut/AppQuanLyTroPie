@@ -53,7 +53,7 @@ function AccountScreen({navigation}: any): React.JSX.Element {
 
           <View style={[styles.rowavatar]}>
             <Image
-              source={require('../assets/images/icon/BienThanhNhut.png')}
+              source={{uri: authContext?.account?.avatar}}
               resizeMode="cover"
               style={styles.img}></Image>
             <View>

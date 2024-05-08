@@ -1,5 +1,12 @@
 import React from 'react';
-import {Dimensions, Image, StyleSheet, TextInput, View} from 'react-native';
+import {
+  Dimensions,
+  FlatList,
+  Image,
+  StyleSheet,
+  TextInput,
+  View,
+} from 'react-native';
 import {Colors} from '../assets/Colors';
 const {width, height} = Dimensions.get('window');
 
@@ -14,7 +21,13 @@ export default function PostScreen(): React.JSX.Element {
         />
         <TextInput style={styles.txt} placeholder="Tìm kiếm" />
       </View>
-      <View></View>
+      {/* <FlatList
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+        numColumns={2}
+        contentContainerStyle={styles.flatListContainer}
+      /> */}
     </View>
   );
 }

@@ -8,11 +8,10 @@ import {
 } from 'react-native';
 import {Colors} from '../../assets/Colors';
 import Icon5 from 'react-native-vector-icons/AntDesign';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 const {width, height} = Dimensions.get('window');
 
-function HeaderCreatePost({navigation}: any) {
+function HeaderRoomManagement({navigation}: any) {
   const goBack = () => {
     navigation.goBack();
   };
@@ -26,13 +25,13 @@ function HeaderCreatePost({navigation}: any) {
             color={Colors.white}
             onPress={goBack}></Icon5>
         </TouchableOpacity>
-        <Text style={styles.title}> Thêm bài đăng </Text>
+        <Text style={styles.title}> Phòng trọ</Text>
         <View></View>
       </View>
     </View>
   );
 }
-export default HeaderCreatePost;
+export default HeaderRoomManagement;
 
 const styles = StyleSheet.create({
   container: {

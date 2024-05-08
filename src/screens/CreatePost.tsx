@@ -524,7 +524,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
   item: {
-    width: '33%', // Each item takes 25% of the container width (4 items in a row)
+    width: '33%',
     padding: 5,
     borderWidth: 1,
     borderColor: 'gray',

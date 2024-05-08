@@ -13,18 +13,18 @@ export const listItem: ItemMenu[] = [
   },
   {
     nameIcon: require('../../assets/images/icon/managercustomer.png'),
-    text: 'Quản lý người thuê',
-    screen: 'ManagementPost',
+    text: 'Quản lý phòng',
+    screen: 'RoomManagement',
   },
   {
     nameIcon: require('../../assets/images/icon/contract.png'),
     text: 'Quản lý hợp đồng',
-    screen: 'ManagementPost',
+    screen: 'ContractManagement',
   },
   {
     nameIcon: require('../../assets/images/icon/bill.png'),
     text: 'Quản lý hóa đơn',
-    screen: 'ManagementPost',
+    screen: 'BillManagement',
   },
   {
     nameIcon: require('../../assets/images/icon/analytics.png'),

@@ -11,6 +11,11 @@ const data = [
   // Thêm dữ liệu khác nếu cần thiết
 ];
 
+interface Props {
+  data: Posts[];
+  onPress: (id: number) => void;
+}
+
 type props = {
   provinceroot: string;
   districtHCM: District[];
@@ -18,13 +23,13 @@ type props = {
   districtHN: District[];
 };
 
-export const renderCards = (posts: Posts[]) => {
+export const renderCards = ({data, onPress}: Props) => {
   const cardRows = [];
-  for (let i = 0; i < posts.length; i += 2) {
+  for (let i = 0; i < data.length; i += 2) {
     const row = (
       <View key={i} style={{flexDirection: 'row'}}>
-        {posts.slice(i, i + 2).map(item => (
-          <CardPost2 key={item.id} item={item} />
+        {data.slice(i, i + 2).map(item => (
+          <CardPost2 key={item.id} item={item} onPress={onPress} />
         ))}
       </View>
     );

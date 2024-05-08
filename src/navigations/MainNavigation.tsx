@@ -21,6 +21,12 @@ import FavoriteScreen from '../screens/FavoriteScreen';
 import HeaderFavorite from './HeaderNavigator/HeaderFavorite';
 import PostScreen from '../screens/PostScreen';
 import HeaderPost from './HeaderNavigator/HeaderPost';
+import ContractManagement from '../screens/ContractManagement';
+import HeaderContractManagement from './HeaderNavigator/HeaderContractManagement';
+import BillManagement from '../screens/BillManagement';
+import RoomManagement from '../screens/RoomManagement';
+import HeaderRoomManagement from './HeaderNavigator/HeaderRoomManagement';
+import HeaderBillManagement from './HeaderNavigator/HeaderBillManagement';
 
 const Stack = createNativeStackNavigator();
 export default function MainNavigation() {
@@ -35,6 +41,37 @@ export default function MainNavigation() {
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
 
+        <Stack.Screen
+          name="RoomManagement"
+          component={RoomManagement}
+          options={{
+            headerShown: true,
+            header: ({navigation}) => (
+              <HeaderRoomManagement navigation={navigation} />
+            ),
+          }}
+        />
+
+        <Stack.Screen
+          name="BillManagement"
+          component={BillManagement}
+          options={{
+            headerShown: true,
+            header: ({navigation}) => (
+              <HeaderBillManagement navigation={navigation} />
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="ContractManagement"
+          component={ContractManagement}
+          options={{
+            headerShown: true,
+            header: ({navigation}) => (
+              <HeaderContractManagement navigation={navigation} />
+            ),
+          }}
+        />
         <Stack.Screen name="DetailScreen" component={DetailScreen} />
         <Stack.Screen
           name="PostScreen"
@@ -60,7 +97,7 @@ export default function MainNavigation() {
           options={{
             headerShown: true,
             header: ({navigation}) => (
-              <HeaderCreatePost navigation={navigation} />
+              <HeaderCreateRoom navigation={navigation} />
             ),
           }}
         />

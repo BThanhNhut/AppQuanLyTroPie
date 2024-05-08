@@ -15,14 +15,18 @@ const {width, height} = Dimensions.get('window');
 
 type cardPostProps = {
   item: Posts;
+  onPress: (id: number) => void;
 };
 
-function CardPost2({item}: cardPostProps) {
+function CardPost2({item, onPress}: cardPostProps) {
   function formatCurrency(amount: any) {
     return amount.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'});
   }
   return (
-    <TouchableOpacity style={styles.container} activeOpacity={0.5}>
+    <TouchableOpacity
+      style={styles.container}
+      activeOpacity={0.5}
+      onPress={() => onPress(item.id)}>
       <Image
         style={styles.image}
         source={{uri: item.rooms.image}}

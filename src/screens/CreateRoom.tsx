@@ -233,15 +233,6 @@ function CreateRoom() {
             Loại phòng
           </Text>
           <View style={styles.container2}>
-            {/* {types.map((item, index) => (
-              <TouchableOpacity
-                key={index}
-                style={[styles.typeroom]}
-                activeOpacity={0.8}
-                onPress={handlePressType}>
-                <Text>{item.type_name}</Text>
-              </TouchableOpacity>
-            ))} */}
             <RadioGroup
               radioButtons={radioButtons}
               onPress={setSelectedId}
@@ -393,10 +384,10 @@ function CreateRoom() {
           </View>
 
           <View style={[styles.rowonly, {marginTop: 15}]}>
-            {/* <Image
-              source={require('../assets/thumbs-up.png')}
+            <Image
+              source={require('../assets/images/icon/auction.png')}
               style={[styles.icon, {width: 24, height: 24}]}
-              resizeMode="contain"></Image> */}
+              resizeMode="contain"></Image>
             <Text style={{fontWeight: 'bold'}}> Tiện nghi</Text>
           </View>
 
@@ -418,11 +409,11 @@ function CreateRoom() {
           </View>
 
           <View style={[styles.rowonly, {marginTop: 15}]}>
-            {/* <Image
-              source={require('../assets/thumbs-up.png')}
+            <Image
+              source={require('../assets/images/icon/furniture.png')}
               style={[styles.icon, {width: 24, height: 24}]}
               resizeMode="contain"></Image>
-            <Text style={{fontWeight: 'bold'}}> Nội thất</Text> */}
+            <Text style={{fontWeight: 'bold'}}> Nội thất</Text>
           </View>
 
           <View style={styles.container3}>
@@ -477,6 +468,7 @@ const styles = StyleSheet.create({
   },
   rowonly: {
     flexDirection: 'row',
+    marginBottom: 10,
   },
   icon: {
     width: 24,
@@ -496,7 +488,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
   item: {
-    width: '33%', // Each item takes 25% of the container width (4 items in a row)
+    width: '33%',
     padding: 5,
     borderWidth: 1,
     borderColor: 'gray',
@@ -548,13 +540,14 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     width: width * 0.45,
     height: height * 0.05,
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     margin: 5,
     borderWidth: 1,
     borderRadius: 10,
     borderColor: Colors.silver,
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
   selectedButton: {
     // Màu của nút khi được chọn

@@ -155,7 +155,7 @@ export type Account = {
 };
 
 export type AccountLogin = {
-  msg: string;
   access_token: string;
   account: Account;
+  msg: string;
 };

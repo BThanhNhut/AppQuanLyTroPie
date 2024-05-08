@@ -181,19 +181,23 @@ export const districtsOfHaNoi: District[] = [
 
 export const scrollData: ItemMenu[] = [
   {
-    nameIcon: require('../images/sv1.png'),
+    nameIcon: require('../images/icon/sv1.png'),
     text: 'Tìm kiếm địa điểm gần nhất',
+    screen: 'Home',
   },
   {
-    nameIcon: require('../images/sv2.png'),
+    nameIcon: require('../images/icon/sv2.png'),
     text: 'Tin đăng cho thuê',
+    screen: 'Home',
   },
   {
-    nameIcon: require('../images/sv3.png'),
+    nameIcon: require('../images/icon/sv3.png'),
     text: 'Tin đăng tìm phòng',
+    screen: 'Home',
   },
   {
-    nameIcon: require('../images/sv4.png'),
+    nameIcon: require('../images/icon/sv4.png'),
     text: 'Vận chuyển',
+    screen: 'Home',
   },
 ];

@@ -16,13 +16,27 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function LoginScreen({navigation}: any): React.JSX.Element {
   const authContext = useContext(AuthContext);
+  const [account, setAccount] = useState<AccountLogin>();
   const [username, setusername] = useState<string>(
     authContext?.account?.username || '',
   );
   const [password, setpassword] = useState<string>(
     authContext?.account?.password || '',
   );
-  const [account, setAccount] = useState<AccountLogin | undefined>(undefined);
+
+  function validateInput(input: string) {
+    // Kiểm tra input không được trống
+    if (!input.trim()) {
+      return false;
+    }
+    // Kiểm tra input không chứa ký tự đặc biệt
+    const specialChars = /[!@#$%^&*(),.?":{}|<>]/;
+    if (specialChars.test(input)) {
+      return false;
+    }
+
+    return true;
+  }
 
   const fetchAccount = async () => {
     try {
@@ -36,15 +50,22 @@ export default function LoginScreen({navigation}: any): React.JSX.Element {
         ),
       ]);
       setAccount(responses[0].data);
+      console.log(responses[0].data);
     } catch (error) {
       console.log('fetch api error', error);
     }
   };
 
   const handleLogin = async () => {
+    await fetchAccount();
+    const isValidUsername = validateInput(username);
+    const isValidPassword = validateInput(password);
+
+    if (!isValidUsername || !isValidPassword) {
+      console.log('Username và password không hợp lệ');
+      return;
+    }
     try {
-      await fetchAccount();
-      console.log(username);
       if (
         account &&
         username?.toLocaleLowerCase() ===
@@ -57,6 +78,13 @@ export default function LoginScreen({navigation}: any): React.JSX.Element {
           account.account.customer_name,
         );
         await AsyncStorage.setItem('username', account.account.username);
+        await AsyncStorage.setItem('password', account.account.password);
+        await AsyncStorage.setItem('avatar', account.account.avatar);
+        await AsyncStorage.setItem(
+          'phone_number',
+          account.account.phone_number,
+        );
+        await AsyncStorage.setItem('address', account.account.address);
         await AsyncStorage.setItem('access_token', account.access_token);
         authContext?.setAccount(account.account);
         navigation.replace('TabsNavigator');
@@ -95,7 +123,9 @@ export default function LoginScreen({navigation}: any): React.JSX.Element {
           <TouchableOpacity
             style={styles.button}
             activeOpacity={0.8}
-            onPress={handleLogin}>
+            onPress={() => {
+              handleLogin();
+            }}>
             <Text style={styles.text3}>Đăng Nhập</Text>
           </TouchableOpacity>
           <View style={{flexDirection: 'row'}}>

@@ -8,10 +8,15 @@ import {
 } from 'react-native';
 import {Colors} from '../assets/Colors';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
+import {Linking} from 'react-native';
 
 const {width, height} = Dimensions.get('window');
 
-function BottomDetail() {
+function BottomDetail(): React.JSX.Element {
+  const callPhoneNumber = (phoneNumber: string) => {
+    const url = `tel:${phoneNumber}`;
+    Linking.openURL(url);
+  };
   return (
     <View style={styles.container}>
       <View style={styles.row}>
@@ -21,9 +26,12 @@ function BottomDetail() {
             <Text style={styles.text}>Chat</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button2} activeOpacity={0.7}>
+        <TouchableOpacity
+          style={styles.button2}
+          activeOpacity={0.7}
+          onPress={() => callPhoneNumber('0948412')}>
           <View style={styles.row}>
-            <Icon2 name="messenger" size={15} color={Colors.primary}></Icon2>
+            <Icon2 name="local-phone" size={15} color={Colors.primary}></Icon2>
             <Text style={styles.text2}>Gọi</Text>
           </View>
         </TouchableOpacity>

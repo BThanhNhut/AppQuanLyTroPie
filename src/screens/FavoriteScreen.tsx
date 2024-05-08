@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   Dimensions,
   Image,
@@ -13,13 +13,15 @@ import {favoriteItem} from '../assets/types/PropTypes';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
 import {Colors} from '../assets/Colors';
+import {AuthContext} from '../contexts/AuthContext';
 
 const {width, height} = Dimensions.get('window');
 
 export default function FavoriteScreen(): React.JSX.Element {
   const [favorite, setfavorite] = useState<favoriteItem[]>();
+  const authContext = useContext(AuthContext);
+  const id_account = authContext?.account?.id;
 
-  const id_account = 1;
   useEffect(() => {
     fetchData();
   }, []);

@@ -24,6 +24,8 @@ import CardAddress from '../components/CardAddress';
 import CardPost from '../components/CardPost';
 import CardSearchMenu from '../components/CardSeachMenu';
 
+
+
 const {width, height} = Dimensions.get('window');
 export default function HomeScreen({navigation}: any): React.JSX.Element {
   const [showHeader, setShowHeader] = useState(false);
@@ -31,6 +33,8 @@ export default function HomeScreen({navigation}: any): React.JSX.Element {
   const searchContext = useContext(SearchContext);
   const [data, setData] = useState<Posts[]>([]);
 
+
+  
   const latestPosts = data
     .sort((a, b) => {
       const dateA = new Date(a.create_at).getTime();
@@ -168,7 +172,7 @@ export default function HomeScreen({navigation}: any): React.JSX.Element {
           style={{
             width: width,
           }}>
-          {renderCards(data)}
+          {renderCards({data, onPress: onpressDetail})}
         </View>
       </ScrollView>
     </SafeAreaView>
