@@ -1,1 +1,1 @@
-# Quản lý bán hàng
+# App tìm trọ và quản lý trọ
