@@ -14,3 +14,11 @@
 - Quản lý yêu cầu bảo trì: Ghi nhận và quản lý các yêu cầu bảo trì từ phía khách thuê.
 
 ## Giao diện của ứng dụng
+<div align="center">
+  <img src="[link_to_image1](https://didongviet.vn/dchannel/wp-content/uploads/2023/08/hinh-nen-3d-hinh-nen-iphone-dep-3d-didongviet@2x-576x1024.jpg)" alt="Giao diện ứng dụng" width="400" />
+  <br>
+  Ghi chú cho hình ảnh 1
+  <img src="[link_to_image2](https://didongviet.vn/dchannel/wp-content/uploads/2023/08/hinh-nen-3d-hinh-nen-iphone-dep-3d-didongviet@2x-576x1024.jpg)" alt="Giao diện ứng dụng" width="400" />
+  <br>
+  Ghi chú cho hình ảnh 2
+</div>
