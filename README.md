@@ -18,7 +18,7 @@
   <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/6a2b71f3-19df-4c81-8bfc-17a4f6e63205" alt="Giao diện ứng dụng" width="400" />
   <br>
   Ghi chú cho hình ảnh 1
-  <img src="[link_to_image2](https://didongviet.vn/dchannel/wp-content/uploads/2023/08/hinh-nen-3d-hinh-nen-iphone-dep-3d-didongviet@2x-576x1024.jpg)" alt="Giao diện ứng dụng" width="400" />
+  <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/ef440984-c933-4419-97e4-df030c188d44" alt="Giao diện ứng dụng" width="400" />
   <br>
   Ghi chú cho hình ảnh 2
 </div>
