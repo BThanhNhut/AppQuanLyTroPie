@@ -14,9 +14,47 @@
 - Quản lý yêu cầu bảo trì: Ghi nhận và quản lý các yêu cầu bảo trì từ phía khách thuê.
 
 ## Giao diện của ứng dụng
-<div align="center">
-  <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/6a2b71f3-19df-4c81-8bfc-17a4f6e63205" alt="Giao diện ứng dụng" width="150" />
-  Ghi chú cho hình ảnh 1
-  <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/ef440984-c933-4419-97e4-df030c188d44" alt="Giao diện ứng dụng" width="150" />
-  Ghi chú cho hình ảnh 2
-</div>
+
+<table align="center">
+  <tr>
+    <td style="text-align: center;">
+      <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/6a2b71f3-19df-4c81-8bfc-17a4f6e63205" alt="Giao diện ứng dụng" width="250" />
+      <span style="margin-left: 10px;">Ghi chú cho hình ảnh 3</span>
+    </td>
+    <td style="text-align: center;">
+      <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/ef440984-c933-4419-97e4-df030c188d44" alt="Giao diện ứng dụng" width="250" />
+      <span style="margin-left: 10px;">Ghi chú cho hình ảnh 4</span>
+    </td>
+  </tr>
+    <tr>
+    <td style="text-align: center;">
+      <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/6a2b71f3-19df-4c81-8bfc-17a4f6e63205" alt="Giao diện ứng dụng" width="250" />
+      <span style="margin-left: 10px;">Ghi chú cho hình ảnh 3</span>
+    </td>
+    <td style="text-align: center;">
+      <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/ef440984-c933-4419-97e4-df030c188d44" alt="Giao diện ứng dụng" width="250" />
+      <span style="margin-left: 10px;">Ghi chú cho hình ảnh 4</span>
+    </td>
+  </tr>
+    <tr>
+    <td style="text-align: center;">
+      <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/6a2b71f3-19df-4c81-8bfc-17a4f6e63205" alt="Giao diện ứng dụng" width="250" />
+      <span style="margin-left: 10px;">Ghi chú cho hình ảnh 3</span>
+    </td>
+    <td style="text-align: center;">
+      <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/ef440984-c933-4419-97e4-df030c188d44" alt="Giao diện ứng dụng" width="250" />
+      <span style="margin-left: 10px;">Ghi chú cho hình ảnh 4</span>
+    </td>
+  </tr>
+    <tr>
+    <td style="text-align: center;">
+      <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/6a2b71f3-19df-4c81-8bfc-17a4f6e63205" alt="Giao diện ứng dụng" width="250" />
+      <span style="margin-left: 10px;">Ghi chú cho hình ảnh 3</span>
+    </td>
+    <td style="text-align: center;">
+      <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/ef440984-c933-4419-97e4-df030c188d44" alt="Giao diện ứng dụng" width="250" />
+      <span style="margin-left: 10px;">Ghi chú cho hình ảnh 4</span>
+    </td>
+  </tr>
+</table>
+
