@@ -19,6 +19,4 @@
   Ghi chú cho hình ảnh 1
   <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/ef440984-c933-4419-97e4-df030c188d44" alt="Giao diện ứng dụng" width="150" />
   Ghi chú cho hình ảnh 2
-  <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/ef440984-c933-4419-97e4-df030c188d44" alt="Giao diện ứng dụng" width="150" />
-  Ghi chú cho hình ảnh 2
 </div>
