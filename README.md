@@ -6,7 +6,7 @@
 
 ## Tính năng
 
-- Quản lý danh sách phòng trọ: Thêm, sửa, xóa phòng trọ.
+- Quản lý danh sách phòng trọ, quản lý bài đăng.
 - Quản lý thông tin khách thuê: Thêm, sửa, xóa thông tin về khách thuê, bao gồm thông tin cá nhân và hợp đồng thuê.
 - Tạo và quản lý hóa đơn: Tạo hóa đơn cho từng khách thuê, ghi nhận các khoản thu và nợ.
 - Quản lý yêu cầu bảo trì: Ghi nhận và quản lý các yêu cầu bảo trì từ phía khách thuê.
