@@ -93,13 +93,12 @@
    </tr>
    <tr>
       <td style="text-align: center;">
-         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/b7b65231-743c-4708-a76a-0a3887a8c542" alt="Giao diện ứng dụng" width="200" />
-         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/b7b65231-743c-4708-a76a-0a3887a8c542" alt="Giao diện ứng dụng" width="200" />
-         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/b7b65231-743c-4708-a76a-0a3887a8c542" alt="Giao diện ứng dụng" width="200" />
+         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/62a4f2e5-27a0-4b45-b976-60c511848542" alt="Giao diện ứng dụng" width="200" />
+         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/41681889-b795-4942-bf97-acb1f04dbe9c" alt="Giao diện ứng dụng" width="200" />
          <div style="width: 150px; text-align: justify;">Màn hình đăng nhập</div>
       </td>
       <td align="center" width="250">
-         Đây là màn hình đăng nhập, và các thông báo nếu người dùng nhập không hợp lê
+         Đây là màn hình hiển thị thông tin tài khoản và các chức năng
       </td>
    </tr>
    <tr>
