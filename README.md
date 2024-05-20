@@ -72,7 +72,7 @@
    <tr>
       <td style="text-align: center;">
          <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/10bef490-f678-4a2a-9649-8645382d77a8" alt="Giao diện ứng dụng" width="200" />
-         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/10bef490-f678-4a2a-9649-8645382d77a8" alt="Giao diện ứng dụng" width="200" />
+         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/e35dc199-39ea-438a-bccb-fce411b04591" alt="Giao diện ứng dụng" width="200" />
          <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/47f8ce88-6aa6-48ed-a578-910199a367df" alt="Giao diện ứng dụng" width="200" />
          <img src=https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/2efde44c-0838-4eb7-a0e3-845bcdfed901" alt="Giao diện ứng dụng" width="200" />
          <div style="width: 150px; text-align: justify;">Màn hình đăng nhập</div>
