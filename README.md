@@ -72,8 +72,9 @@
    <tr>
       <td style="text-align: center;">
          <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/10bef490-f678-4a2a-9649-8645382d77a8" alt="Giao diện ứng dụng" width="200" />
+         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/10bef490-f678-4a2a-9649-8645382d77a8" alt="Giao diện ứng dụng" width="200" />
          <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/47f8ce88-6aa6-48ed-a578-910199a367df" alt="Giao diện ứng dụng" width="200" />
-         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/ab25bd89-061b-44ae-869b-c11a3cadd677" alt="Giao diện ứng dụng" width="200" />
+         <img src=https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/2efde44c-0838-4eb7-a0e3-845bcdfed901" alt="Giao diện ứng dụng" width="200" />
          <div style="width: 150px; text-align: justify;">Màn hình đăng nhập</div>
       </td>
       <td align="center" width="250">
@@ -82,13 +83,12 @@
    </tr>
    <tr>
       <td style="text-align: center;">
-         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/b7b65231-743c-4708-a76a-0a3887a8c542" alt="Giao diện ứng dụng" width="200" />
-         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/b7b65231-743c-4708-a76a-0a3887a8c542" alt="Giao diện ứng dụng" width="200" />
-         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/b7b65231-743c-4708-a76a-0a3887a8c542" alt="Giao diện ứng dụng" width="200" />
+         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/af8443fd-27c3-453f-9666-9ecd6cafc31d" alt="Giao diện ứng dụng" width="200" />
+         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/967b70ae-7e8e-42b6-bc7e-cee2f655a4fb" alt="Giao diện ứng dụng" width="200" />
          <div style="width: 150px; text-align: justify;">Màn hình đăng nhập</div>
       </td>
       <td align="center" width="250">
-         Đây là màn hình đăng nhập, và các thông báo nếu người dùng nhập không hợp lê
+         Đây là màn hình chat chứa danh sách các tài khoản mà tài khoản mình đang chat, các thông tin sẽ được lưu trên firestorage.
       </td>
    </tr>
    <tr>
