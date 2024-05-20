@@ -8,7 +8,6 @@
 - Quản lý yêu thích.
 - Quản lý hợp đồng.
 - Tạo và quản lý hóa đơn: Tạo hóa đơn cho từng khách thuê, ghi nhận các khoản thu.
-- Quản lý yêu cầu bảo trì: Ghi nhận và quản lý các yêu cầu bảo trì từ phía khách thuê.
 ## Kiến thức
 - Ngôn ngữ typescript
 - Framework FE: React native
