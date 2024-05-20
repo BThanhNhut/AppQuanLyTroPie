@@ -42,7 +42,7 @@
          <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/bd602644-7ce9-42bc-ba20-4723ae5d546c" alt="Giao diện ứng dụng" width="200" />
          <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/c384eda1-389e-46fc-8882-f7b020f8dffd" alt="Giao diện ứng dụng" width="200" />
          <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/c7d90dff-1491-4bf5-9c99-e0b1b92af9f7" alt="Giao diện ứng dụng" width="200" />
-         <div style="width: 150px; text-align: justify;">Màn hình đăng nhập</div>
+         <div style="width: 150px; text-align: justify;">Màn hình thông báo khi lỗi và khi đăng ký tài khoản thành công</div>
       </td>
       <td align="center" width="250">
          Đây là một vài ràng buộc sẽ xuất hiện khi vi phạm ràng buộc, ví dụ như tài khoản chứa kí tự đặc biệt, để trống, không đúng định dạng .... 
@@ -50,13 +50,13 @@
    </tr>
    <tr>
       <td style="text-align: center;">
-         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/b7b65231-743c-4708-a76a-0a3887a8c542" alt="Giao diện ứng dụng" width="200" />
-         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/b7b65231-743c-4708-a76a-0a3887a8c542" alt="Giao diện ứng dụng" width="200" />
-         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/b7b65231-743c-4708-a76a-0a3887a8c542" alt="Giao diện ứng dụng" width="200" />
+         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/cc428e75-485f-41f7-b274-1a61fcbd470d" alt="Giao diện ứng dụng" width="200" />
+         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/6a375e37-2f42-4545-91a6-15bde7ebf722" alt="Giao diện ứng dụng" width="200" />
+         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/76380670-a3f8-4f1f-bd56-72a543288407" alt="Giao diện ứng dụng" width="200" />
          <div style="width: 150px; text-align: justify;">Màn hình đăng nhập</div>
       </td>
       <td align="center" width="250">
-         Đây là màn hình đăng nhập, và các thông báo nếu người dùng nhập không hợp lê
+         Đây là màn hình, chứa các thông tin về các nhà trọ đang cho thuê, bài viết gần đây là 4 bài viết được đăng gần đây, con2bai2 viết nổi bậc là 10 bài viết được random ngẫu nhiên 
       </td>
    </tr>
    <tr>
@@ -72,9 +72,9 @@
    </tr>
    <tr>
       <td style="text-align: center;">
-         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/b7b65231-743c-4708-a76a-0a3887a8c542" alt="Giao diện ứng dụng" width="200" />
-         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/b7b65231-743c-4708-a76a-0a3887a8c542" alt="Giao diện ứng dụng" width="200" />
-         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/b7b65231-743c-4708-a76a-0a3887a8c542" alt="Giao diện ứng dụng" width="200" />
+         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/cc428e75-485f-41f7-b274-1a61fcbd470d" alt="Giao diện ứng dụng" width="200" />
+         <img src="" alt="Giao diện ứng dụng" width="200" />
+         <img src="" alt="Giao diện ứng dụng" width="200" />
          <div style="width: 150px; text-align: justify;">Màn hình đăng nhập</div>
       </td>
       <td align="center" width="250">
