@@ -103,13 +103,13 @@
    </tr>
    <tr>
       <td style="text-align: center;">
-         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/b7b65231-743c-4708-a76a-0a3887a8c542" alt="Giao diện ứng dụng" width="200" />
-         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/b7b65231-743c-4708-a76a-0a3887a8c542" alt="Giao diện ứng dụng" width="200" />
-         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/b7b65231-743c-4708-a76a-0a3887a8c542" alt="Giao diện ứng dụng" width="200" />
-         <div style="width: 150px; text-align: justify;">Màn hình đăng nhập</div>
+         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/74b28cbd-97a1-4858-b21d-7e01dfbc4cd5" alt="Giao diện ứng dụng" width="200" />
+         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/0558b6e8-e9b0-4fd2-a0ee-06dc48506dac" alt="Giao diện ứng dụng" width="200" />
+         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/e03d42db-a815-4f9f-bc0f-0e6c112f66db" alt="Giao diện ứng dụng" width="200" />
+         <div style="width: 150px; text-align: justify;">Thông báo thêm, xóa yêu thích, và màn hình hiển thị các bài post yêu thích</div>
       </td>
       <td align="center" width="250">
-         Đây là màn hình đăng nhập, và các thông báo nếu người dùng nhập không hợp lê
+         Đây là màn hình hiển thị các yêu thích của tài khoản.
       </td>
    </tr>
    <tr>
