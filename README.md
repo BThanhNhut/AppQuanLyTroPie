@@ -56,7 +56,7 @@
          <div style="width: 150px; text-align: justify;">Màn hình đăng nhập</div>
       </td>
       <td align="center" width="250">
-         Đây là màn hình, chứa các thông tin về các nhà trọ đang cho thuê, bài viết gần đây là 4 bài viết được đăng gần đây, con2bai2 viết nổi bậc là 10 bài viết được random ngẫu nhiên 
+         Đây là màn hình, chứa các thông tin về các nhà trọ đang cho thuê, bài viết gần đây là 4 bài viết được đăng gần đây, Các bài viết nổi bậc là 10 bài viết được random ngẫu nhiên 
       </td>
    </tr>
    <tr>
