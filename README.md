@@ -114,13 +114,16 @@
    </tr>
    <tr>
       <td style="text-align: center;">
-         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/b7b65231-743c-4708-a76a-0a3887a8c542" alt="Giao diện ứng dụng" width="200" />
-         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/b7b65231-743c-4708-a76a-0a3887a8c542" alt="Giao diện ứng dụng" width="200" />
-         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/b7b65231-743c-4708-a76a-0a3887a8c542" alt="Giao diện ứng dụng" width="200" />
-         <div style="width: 150px; text-align: justify;">Màn hình đăng nhập</div>
+         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/bdd9d857-0f42-4b2a-8bde-f3b194dae172" alt="Giao diện ứng dụng" width="200" />
+         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/0badc9b7-a2c4-48e5-94be-cb5e751765a5" alt="Giao diện ứng dụng" width="200" />
+         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/1dab8455-c40e-4d29-ac1a-0be598d1924c" alt="Giao diện ứng dụng" width="200" />
+         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/17a1b8fd-8683-4289-8ec8-1a19d87e7898" alt="Giao diện ứng dụng" width="200" />
+         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/9517abaa-4c21-49bf-8263-fa21c563c792" alt="Giao diện ứng dụng" width="200" />
+         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/2cb15ed2-7d0c-4c89-8917-ff4752598aa5" alt="Giao diện ứng dụng" width="200" />
+         <img src="https://github.com/BThanhNhut/AppQuanLyTroPie/assets/92388024/f15e23be-0e6a-484b-adfe-bf4990ada4ef" alt="Giao diện ứng dụng" width="200" />
       </td>
       <td align="center" width="250">
-         Đây là màn hình đăng nhập, và các thông báo nếu người dùng nhập không hợp lê
+         Đây là màn hình tạo phòng, tạo bài đăng, và quản lý phòng
       </td>
    </tr>
 </table>
